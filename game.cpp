@@ -7,31 +7,10 @@ Game::Game()
     // change to a new state
 }
 
-Game::~Game()
-{
-    while (!states.empty())
-    {
-        delete states.top();
-        states.pop();
-    }
-}
-
-Game* Game::instance = nullptr;
-
-void Game::destroy()
-{
-    delete instance;
-    instance = nullptr;
-}
-
 Game& Game::getInstance()
 {
-    if (instance == nullptr)
-    {
-        instance = new Game();
-    }
-
-    return *instance;
+    static Game instance;
+    return instance;
 }
 
 State* Game::getCurrentState()
@@ -41,7 +20,7 @@ State* Game::getCurrentState()
         return nullptr;
     }
 
-    return states.top();
+    return states.top().get();
 }
 
 sf::Window& Game::getWindow()
@@ -49,29 +28,27 @@ sf::Window& Game::getWindow()
     return window;
 }
 
-void Game::changeState(State* new_state)
+void Game::changeState(std::unique_ptr<State> new_state)
 {
     if (!states.empty())
     {
-        delete states.top();
         states.pop();
     }
 
-    states.push(new_state);
+    states.push(std::move(new_state));
 }
 
 void Game::popState()
 {
     if (!states.empty())
     {
-        delete states.top();
         states.pop();
     }
 }
 
-void Game::pushState(State* new_state)
+void Game::pushState(std::unique_ptr<State> new_state)
 {
-    states.push(new_state);
+    states.push(std::move(new_state));
 }
 
 void Game::run()
