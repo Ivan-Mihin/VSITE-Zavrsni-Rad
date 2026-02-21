@@ -6,11 +6,13 @@ class StateMainMenu : public State
 {
 private:
     sf::Texture background;
-    sf::Sprite background_sprite;
+    std::optional<sf::Sprite> background_sprite;
     sf::Texture logo;
-    sf::Sprite logo_sprite;
+    std::optional<sf::Sprite> logo_sprite;
 
 public:
+    StateMainMenu();
+
     void handleInput(const sf::Event& event) override;
     void update(float delta_time) override;
     void render(sf::RenderWindow& window) override;

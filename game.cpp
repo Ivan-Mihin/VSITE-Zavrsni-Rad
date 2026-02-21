@@ -4,7 +4,7 @@
 Game::Game()
     : window(sf::VideoMode({ 800, 800 }), "Tetris!", sf::Style::Titlebar | sf::Style::Close)
 {
-    // change to a new state
+    changeState(std::make_unique<StateMainMenu>());
 }
 
 Game& Game::getInstance()
@@ -23,7 +23,7 @@ State* Game::getCurrentState()
     return states.top().get();
 }
 
-sf::Window& Game::getWindow()
+sf::RenderWindow& Game::getWindow()
 {
     return window;
 }

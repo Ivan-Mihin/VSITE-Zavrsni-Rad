@@ -19,7 +19,7 @@ public:
     static Game& getInstance();
 
     State* getCurrentState();
-    sf::Window& getWindow();
+    sf::RenderWindow& getWindow();
 
     void changeState(std::unique_ptr<State> new_state);
     void popState();
