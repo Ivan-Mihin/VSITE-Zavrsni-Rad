@@ -7,8 +7,5 @@ CommandExit::CommandExit(sf::RenderWindow& windowRef)
 
 void CommandExit::execute()
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Escape))
-    {
-        window.close();
-    }
+    window.close();
 }

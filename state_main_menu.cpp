@@ -1,4 +1,6 @@
 #include "state_main_menu.h"
+#include "command_exit.h"
+#include "game.h"
 
 StateMainMenu::StateMainMenu()
 {
@@ -28,7 +30,8 @@ void StateMainMenu::handleInput(const sf::Event& event)
         }
         else if (key_event->scancode == sf::Keyboard::Scancode::Escape)
         {
-            // game end
+            CommandExit exit(Game::getInstance().getWindow());
+            exit.execute();
         }
     }
 }
