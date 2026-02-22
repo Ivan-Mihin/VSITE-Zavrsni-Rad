@@ -138,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
+    <ClInclude Include="ICommand.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="state_game_over.h" />
     <ClInclude Include="state_main_menu.h" />
