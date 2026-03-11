@@ -66,14 +66,6 @@ void Game::run()
                 window.close();
             }
 
-            if (const auto* key = event->getIf<sf::Event::KeyPressed>())
-            {
-                if (key->scancode == sf::Keyboard::Scancode::Escape)
-                {
-                    window.close();
-                }
-            }
-
             if (auto current = getCurrentState())
             {
                 current->handleInput(*event);

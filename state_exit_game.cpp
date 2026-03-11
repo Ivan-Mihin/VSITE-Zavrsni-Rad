@@ -1,5 +1,5 @@
-#include "state_exit_game.h"
 #include "game.h"
+#include "state_exit_game.h"
 
 StateExitGame::StateExitGame()
 {
@@ -25,11 +25,18 @@ StateExitGame::StateExitGame()
 
 void StateExitGame::handleInput(const sf::Event& event)
 {
-    if (const auto* key_event = event.getIf<sf::Event::KeyPressed>())
+    if (const auto* key = event.getIf<sf::Event::KeyPressed>())
     {
-        if (key_event->scancode == sf::Keyboard::Scancode::Enter)
+        if (key->scancode == sf::Keyboard::Scancode::Y ||
+            key->scancode == sf::Keyboard::Scancode::Z)
         {
-            // change later
+            Game::getInstance().getWindow().close();
+        }
+
+        if (key->scancode == sf::Keyboard::Scancode::N ||
+            key->scancode == sf::Keyboard::Scancode::Escape)
+        {
+            Game::getInstance().popState();
         }
     }
 }

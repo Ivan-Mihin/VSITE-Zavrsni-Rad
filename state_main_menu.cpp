@@ -1,5 +1,6 @@
-#include "state_main_menu.h"
 #include "game.h"
+#include "state_exit_game.h"
+#include "state_main_menu.h"
 
 StateMainMenu::StateMainMenu()
 {
@@ -21,11 +22,16 @@ StateMainMenu::StateMainMenu()
 
 void StateMainMenu::handleInput(const sf::Event& event)
 {
-    if (const auto* key_event = event.getIf<sf::Event::KeyPressed>())
+    if (const auto* key = event.getIf<sf::Event::KeyPressed>())
     {
-        if (key_event->scancode == sf::Keyboard::Scancode::Enter)
+        if (key->scancode == sf::Keyboard::Scancode::Escape)
         {
-            // game start
+            Game::getInstance().pushState(std::make_unique<StateExitGame>());
+        }
+
+        if (key->scancode == sf::Keyboard::Scancode::Space)
+        {
+            // switch to StatePlaying
         }
     }
 }
