@@ -136,6 +136,7 @@
     <ClCompile Include="state_exit_game.cpp" />
     <ClCompile Include="state_game_over.cpp" />
     <ClCompile Include="state_main_menu.cpp" />
+    <ClCompile Include="tetromino.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
@@ -144,6 +145,7 @@
     <ClInclude Include="state_exit_game.h" />
     <ClInclude Include="state_game_over.h" />
     <ClInclude Include="state_main_menu.h" />
+    <ClInclude Include="tetromino.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
