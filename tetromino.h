@@ -5,14 +5,14 @@
 class Tetromino 
 {
 protected:
-    std::vector<sf::Vector2i> shape_matrix;
     sf::Color color;
-    int rotation;
+    std::vector<std::vector<sf::Vector2i>> rotation_states;
+    int current_rotation;
 
 public:
     virtual ~Tetromino() {}
 
-    const std::vector<sf::Vector2i>& getShapeMatrix() const;
+    const std::vector<std::vector<sf::Vector2i>>& getShapeMatrix() const;
     sf::Color getColor() const;
 
     void rotate();

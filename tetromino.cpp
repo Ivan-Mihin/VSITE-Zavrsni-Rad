@@ -1,8 +1,8 @@
 #include "tetromino.h"
 
-const std::vector<sf::Vector2i>& Tetromino::getShapeMatrix() const 
+const std::vector<std::vector<sf::Vector2i>>& Tetromino::getShapeMatrix() const
 {
-	return shape_matrix;
+	return rotation_states;
 }
 
 sf::Color Tetromino::getColor() const 
@@ -12,5 +12,5 @@ sf::Color Tetromino::getColor() const
 
 void Tetromino::rotate() 
 {
-	// add later
+	current_rotation = (current_rotation + 1) % rotation_states.size();
 }
