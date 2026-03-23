@@ -1,8 +1,10 @@
+#include "tetromino_enums.h"
 #include "tetromino_shapes.h"
 
 ShapeI::ShapeI() 
 {
-    color = sf::Color::Blue;
+    shape = TetrominoShape::ShapeI;
+    color = TetrominoColor::Red;
     rotation_states = {
         {{0,1},{1,1},{2,1},{3,1}}, // rotation 0, default
         {{2,0},{2,1},{2,2},{2,3}}, // rotation 1
@@ -14,7 +16,8 @@ ShapeI::ShapeI()
 
 ShapeJ::ShapeJ()
 {
-    color = sf::Color::Blue;
+    shape = TetrominoShape::ShapeJ;
+    color = TetrominoColor::Orange;
     rotation_states = {
         {{0,0},{0,1},{1,1},{2,1}}, // rotation 0, default
         {{1,0},{2,0},{1,1},{1,2}}, // rotation 1
@@ -26,7 +29,8 @@ ShapeJ::ShapeJ()
 
 ShapeL::ShapeL()
 {
-    color = sf::Color::Blue;
+    shape = TetrominoShape::ShapeL;
+    color = TetrominoColor::Yellow;
     rotation_states = {
         {{2,0},{0,1},{1,1},{2,1}}, // rotation 0, default
         {{1,0},{1,1},{1,2},{2,2}}, // rotation 1
@@ -38,7 +42,8 @@ ShapeL::ShapeL()
 
 ShapeO::ShapeO()
 {
-    color = sf::Color::Blue;
+    shape = TetrominoShape::ShapeO;
+    color = TetrominoColor::Green;
     rotation_states = {
         {{0,0},{1,0},{0,1},{1,1}}, // rotation 0, default
         {{0,0},{1,0},{0,1},{1,1}}, // rotation 1
@@ -50,7 +55,8 @@ ShapeO::ShapeO()
 
 ShapeS::ShapeS()
 {
-    color = sf::Color::Blue;
+    shape = TetrominoShape::ShapeS;
+    color = TetrominoColor::Cyan;
     rotation_states = {
         {{1,0},{2,0},{0,1},{1,1}}, // rotation 0, default
         {{1,0},{1,1},{2,1},{2,2}}, // rotation 1
@@ -62,7 +68,8 @@ ShapeS::ShapeS()
 
 ShapeT::ShapeT()
 {
-    color = sf::Color::Blue;
+    shape = TetrominoShape::ShapeT;
+    color = TetrominoColor::Blue;
     rotation_states = {
         {{1,0},{0,1},{1,1},{2,1}}, // rotation 0, default
         {{1,0},{1,1},{2,1},{1,2}}, // rotation 1
@@ -74,7 +81,8 @@ ShapeT::ShapeT()
 
 ShapeZ::ShapeZ()
 {
-    color = sf::Color::Blue;
+    shape = TetrominoShape::ShapeZ;
+    color = TetrominoColor::Purple;
     rotation_states = {
         {{0,0},{1,0},{1,1},{2,1}}, // rotation 0, default
         {{2,0},{1,1},{2,1},{1,2}}, // rotation 1

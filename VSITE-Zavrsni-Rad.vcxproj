@@ -148,6 +148,7 @@
     <ClInclude Include="state_main_menu.h" />
     <ClInclude Include="tetromino.h" />
     <ClInclude Include="tetromino_shapes.h" />
+    <ClInclude Include="tetromino_enums.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

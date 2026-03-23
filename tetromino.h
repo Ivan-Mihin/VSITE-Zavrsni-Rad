@@ -1,19 +1,21 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include <vector>
+#include <SFML/Graphics.hpp>
+#include "tetromino_enums.h"
 
 class Tetromino 
 {
 protected:
-    sf::Color color;
+    TetrominoShape shape;
+    TetrominoColor color;
     std::vector<std::vector<sf::Vector2i>> rotation_states;
     int current_rotation;
 
 public:
     virtual ~Tetromino() {}
 
-    const std::vector<std::vector<sf::Vector2i>>& getShapeMatrix() const;
-    sf::Color getColor() const;
-
+    TetrominoShape getShape() const;
+    TetrominoColor getColor() const;
+    const std::vector<std::vector<sf::Vector2i>>& getRotationStates() const;
     void rotate();
 };
