@@ -137,6 +137,7 @@
     <ClCompile Include="state_game_over.cpp" />
     <ClCompile Include="state_main_menu.cpp" />
     <ClCompile Include="tetromino.cpp" />
+    <ClCompile Include="tetromino_factory.cpp" />
     <ClCompile Include="tetromino_shapes.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +148,7 @@
     <ClInclude Include="state_game_over.h" />
     <ClInclude Include="state_main_menu.h" />
     <ClInclude Include="tetromino.h" />
+    <ClInclude Include="tetromino_factory.h" />
     <ClInclude Include="tetromino_shapes.h" />
     <ClInclude Include="tetromino_enums.h" />
   </ItemGroup>
