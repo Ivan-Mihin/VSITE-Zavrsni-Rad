@@ -30,12 +30,8 @@ sf::RenderWindow& Game::getWindow()
 
 void Game::changeState(std::unique_ptr<State> new_state)
 {
-    if (!states.empty())
-    {
-        states.pop();
-    }
-
-    states.push(std::move(new_state));
+    popState();
+    pushState(std::move(new_state));
 }
 
 void Game::popState()

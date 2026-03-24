@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include <unordered_map>
 #include <SFML/Audio.hpp>
 
@@ -16,7 +17,6 @@ public:
 
     static Audio& getInstance();
 
-    void load();
     void playSound(const std::string& name);
     void playMusic(const std::string& name);
 };

@@ -1,8 +1,8 @@
 #pragma once
+#include "state.h"
 #include <memory>
 #include <stack>
 #include <SFML/Graphics.hpp>
-#include "state.h"
 
 class Game
 {

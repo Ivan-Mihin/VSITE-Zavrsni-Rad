@@ -1,6 +1,6 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include "state.h"
+#include <SFML/Graphics.hpp>
 
 class StateExitGame : public State
 {
