@@ -5,10 +5,8 @@
 class StateExitGame : public State
 {
 private:
-    sf::Texture background;
-    std::optional<sf::Sprite> background_sprite;
-    sf::Font font;
-    std::optional<sf::Text> text1, text2;
+    sf::Sprite background;
+    sf::Text text1, text2;
 
 public:
     StateExitGame();

@@ -22,6 +22,6 @@ void StateGameOver::update(float delta_time)
 
 void StateGameOver::render(sf::RenderWindow& window)
 {
-    window.draw(background_sprite);
-    window.draw(logo_sprite);
+    window.draw(background);
+    window.draw(logo);
 }

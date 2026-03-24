@@ -1,26 +1,20 @@
+#include "assets.h"
 #include "game.h"
 #include "state_exit_game.h"
 
-StateExitGame::StateExitGame()
+StateExitGame::StateExitGame() :
+    background(Assets::getInstance().getTexture("background_main_menu_paused")),
+    text1(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    text2(Assets::getInstance().getFont("BaiJamjuree-Regular"))
 {
-    if (!background.loadFromFile("Assets/Sprites/background_main_menu_paused.png"))
-    {
-        throw std::runtime_error("Failed to load background_main_menu_paused.png");
-    }
-    background_sprite.emplace(background);
-    background_sprite->setPosition({ 0, 0 });
 
-    if (!font.openFromFile("Assets/Fonts/BaiJamjuree-Regular.ttf"))
-    {
-        throw std::runtime_error("Failed to load font BaiJamjuree-Regular.ttf");
-    }
-    text1.emplace(font);
-    text1->setPosition({ 200, 100 });
-    text1->setString("Are you sure");
+    background.setPosition({ 0, 0 });
 
-    text2.emplace(font);
-    text2->setPosition({ 400, 100 });
-    text2->setString("Y/N");
+    text1.setPosition({ 200, 100 });
+    text1.setString("Are you sure");
+
+    text2.setPosition({ 400, 100 });
+    text2.setString("Y/N");
 }
 
 void StateExitGame::handleInput(const sf::Event& event)
@@ -48,7 +42,7 @@ void StateExitGame::update(float delta_time)
 
 void StateExitGame::render(sf::RenderWindow& window)
 {
-    window.draw(*background_sprite);
-    window.draw(*text1);
-    window.draw(*text2);
+    window.draw(background);
+    window.draw(text1);
+    window.draw(text2);
 }

@@ -5,10 +5,8 @@
 class StateMainMenu : public State
 {
 private:
-    sf::Texture background;
-    std::optional<sf::Sprite> background_sprite;
-    sf::Texture logo;
-    std::optional<sf::Sprite> logo_sprite;
+    sf::Sprite background;
+    sf::Sprite logo;
 
 public:
     StateMainMenu();

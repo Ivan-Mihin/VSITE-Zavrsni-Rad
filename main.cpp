@@ -1,9 +1,10 @@
+#include "assets.h"
 #include "game.h"
 
 int main() 
 {
-    Game& game = Game::getInstance();
-    game.run();
+    Assets::getInstance().load();
+    Game::getInstance().run();
 
     return 0;
 }
