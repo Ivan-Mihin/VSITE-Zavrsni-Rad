@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="audio.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="state_exit_game.cpp" />
@@ -141,6 +142,7 @@
     <ClCompile Include="tetromino_shapes.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="audio.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="state.h" />
