@@ -1,6 +1,4 @@
 #include "assets.h"
-#include "game.h"
-#include "state_exit_game.h"
 #include "state_playing.h"
 
 StatePlaying::StatePlaying() :
@@ -11,16 +9,15 @@ StatePlaying::StatePlaying() :
 
 void StatePlaying::handleInput(const sf::Event& event)
 {
-    tetris.handleInput(event);
+    // add later
 }
 
 void StatePlaying::update(float delta_time)
 {
-    tetris.update(delta_time);
+    // add later
 }
 
 void StatePlaying::render(sf::RenderWindow& window)
 {
-    window.draw(background);
-    tetris.render(window);
+    // add later
 }

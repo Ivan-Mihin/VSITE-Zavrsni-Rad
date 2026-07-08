@@ -1,13 +1,11 @@
 #pragma once
 #include "state.h"
-#include "tetris.h"
 #include <SFML/Graphics.hpp>
 
 class StatePlaying : public State
 {
 private:
     sf::Sprite background;
-    Tetris tetris;
 
 public:
     StatePlaying();

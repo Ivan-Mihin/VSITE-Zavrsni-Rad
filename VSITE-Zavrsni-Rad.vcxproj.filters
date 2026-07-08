@@ -48,9 +48,6 @@
     <ClCompile Include="state_playing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tetris.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="state.h">
@@ -90,9 +87,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="state_playing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tetris.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
