@@ -1,3 +1,4 @@
+#include "assets.h"
 #include "audio.h"
 
 Audio::Audio() {}
@@ -10,10 +11,10 @@ Audio& Audio::getInstance()
 
 void Audio::playSound(const std::string& name)
 {
-    // add later
+    Assets::getInstance().getSound(name);
 }
 
 void Audio::playMusic(const std::string& name)
 {
-    // add later
+    Assets::getInstance().getMusic(name);
 }
