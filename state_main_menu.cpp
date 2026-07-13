@@ -2,6 +2,7 @@
 #include "game.h"
 #include "state_exit_game.h"
 #include "state_main_menu.h"
+#include "state_playing.h"
 
 StateMainMenu::StateMainMenu() :
     background(Assets::getInstance().getTexture("background_main_menu")),
@@ -24,14 +25,14 @@ void StateMainMenu::handleInput(const sf::Event& event)
 
         if (key->scancode == sf::Keyboard::Scancode::Space)
         {
-            // switch to StatePlaying
+            Game::getInstance().pushState(std::make_unique<StatePlaying>());
         }
     }
 }
 
 void StateMainMenu::update(float delta_time)
 {
-    // add pulsing text effect
+    // add later
 }
 
 void StateMainMenu::render(sf::RenderWindow& window)

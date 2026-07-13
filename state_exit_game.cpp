@@ -37,7 +37,7 @@ void StateExitGame::handleInput(const sf::Event& event)
 
 void StateExitGame::update(float delta_time)
 {
-    // change later
+    // add later
 }
 
 void StateExitGame::render(sf::RenderWindow& window)
