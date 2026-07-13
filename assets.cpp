@@ -21,6 +21,8 @@ void Assets::load()
             throw std::runtime_error("Failed to load background_main_menu.png");
         if (!textures["background_main_menu_paused"].loadFromFile("Assets/Textures/background_main_menu_paused.png"))
             throw std::runtime_error("Failed to load background_main_menu_paused.png");
+        if (!textures["background_playing"].loadFromFile("Assets/Textures/background_playing.png"))
+            throw std::runtime_error("Failed to load background_playing.png");
         if (!textures["board"].loadFromFile("Assets/Textures/board.png"))
             throw std::runtime_error("Failed to load board.png");
         if (!textures["game_over_line"].loadFromFile("Assets/Textures/game_over_line.png"))

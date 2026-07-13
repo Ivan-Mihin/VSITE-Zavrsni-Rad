@@ -4,7 +4,7 @@
 #include "state_playing.h"
 
 StatePlaying::StatePlaying() :
-    background(Assets::getInstance().getTexture("background_main_menu"))
+    background(Assets::getInstance().getTexture("background_playing"))
 {
     background.setPosition({ 0, 0 });
 }
