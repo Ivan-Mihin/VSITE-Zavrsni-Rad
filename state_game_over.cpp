@@ -17,7 +17,6 @@ void StateGameOver::handleInput(const sf::Event& event)
 
 void StateGameOver::update(float delta_time)
 {
-    // add pulsing text effect
 }
 
 void StateGameOver::render(sf::RenderWindow& window)

@@ -32,7 +32,6 @@ void StateMainMenu::handleInput(const sf::Event& event)
 
 void StateMainMenu::update(float delta_time)
 {
-    // add later
 }
 
 void StateMainMenu::render(sf::RenderWindow& window)
