@@ -7,7 +7,6 @@ StateExitGame::StateExitGame() :
     text1(Assets::getInstance().getFont("BaiJamjuree-Regular")),
     text2(Assets::getInstance().getFont("BaiJamjuree-Regular"))
 {
-
     background.setPosition({ 0, 0 });
 
     text1.setPosition({ 200, 100 });

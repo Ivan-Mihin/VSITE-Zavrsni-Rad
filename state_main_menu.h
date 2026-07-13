@@ -7,6 +7,7 @@ class StateMainMenu : public State
 private:
     sf::Sprite background;
     sf::Sprite logo;
+    sf::Text text1, text2;
 
 public:
     StateMainMenu();
