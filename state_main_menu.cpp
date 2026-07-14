@@ -9,14 +9,22 @@ void StateMainMenu::handleInput(const sf::Event& event)
 {
     if (const auto* key = event.getIf<sf::Event::KeyPressed>())
     {
+        if (key->scancode == sf::Keyboard::Scancode::Space ||
+            key->scancode == sf::Keyboard::Scancode::Enter)
+        {
+            if (main_menu.getSelectedMenuItem() == MenuItem::Start)
+            {
+                Game::getInstance().pushState(std::make_unique<StatePlaying>());
+            }
+            else if (main_menu.getSelectedMenuItem() == MenuItem::Exit)
+            {
+                Game::getInstance().pushState(std::make_unique<StateExitGame>());
+            }
+        }
+
         if (key->scancode == sf::Keyboard::Scancode::Escape)
         {
             Game::getInstance().pushState(std::make_unique<StateExitGame>());
-        }
-
-        if (key->scancode == sf::Keyboard::Scancode::Space)
-        {
-            Game::getInstance().pushState(std::make_unique<StatePlaying>());
         }
     }
 

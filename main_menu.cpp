@@ -14,6 +14,13 @@ MainMenu::MainMenu() :
 
     textInitialize(text1, "Start", 50, 400.f, 550.f);
     textInitialize(text2, "Exit", 50, 400.f, 630.f);
+
+    selected = MenuItem::Start;
+}
+
+MenuItem MainMenu::getSelectedMenuItem() const 
+{
+    return selected;
 }
 
 void MainMenu::textInitialize(sf::Text& text, std::string string, int char_size, float pos_x, float pos_y)
@@ -29,7 +36,19 @@ void MainMenu::textInitialize(sf::Text& text, std::string string, int char_size,
 }
 
 void MainMenu::handleInput(const sf::Event& event)
-{   
+{
+    if (const auto* key = event.getIf<sf::Event::KeyPressed>()) 
+    {
+        if (key->scancode == sf::Keyboard::Scancode::Up)
+        {
+            selected = MenuItem::Start;
+        }
+
+        if (key->scancode == sf::Keyboard::Scancode::Down)
+        {
+            selected = MenuItem::Exit;
+        }
+    }
 }
 
 void MainMenu::update(float delta_time)
