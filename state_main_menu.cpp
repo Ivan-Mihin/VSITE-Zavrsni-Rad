@@ -12,11 +12,11 @@ void StateMainMenu::handleInput(const sf::Event& event)
         if (key->scancode == sf::Keyboard::Scancode::Space ||
             key->scancode == sf::Keyboard::Scancode::Enter)
         {
-            if (main_menu.getSelectedMenuItem() == MenuItem::Start)
+            if (main_menu.getSelectedItem() == MainMenuItem::Start)
             {
                 Game::getInstance().pushState(std::make_unique<StatePlaying>());
             }
-            else if (main_menu.getSelectedMenuItem() == MenuItem::Exit)
+            else if (main_menu.getSelectedItem() == MainMenuItem::Exit)
             {
                 Game::getInstance().pushState(std::make_unique<StateExitGame>());
             }

@@ -2,26 +2,26 @@
 #include "main_menu.h"
 
 MainMenu::MainMenu() :
-    background(Assets::getInstance().getTexture("background_main_menu")),
-    logo(Assets::getInstance().getTexture("logo_tetris")),
-    start(Assets::getInstance().getFont("BaiJamjuree-Regular")),
-    exit(Assets::getInstance().getFont("BaiJamjuree-Regular"))
+    sprite_background(Assets::getInstance().getTexture("background_main_menu")),
+    sprite_logo(Assets::getInstance().getTexture("logo_tetris")),
+    text_start(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    text_exit(Assets::getInstance().getFont("BaiJamjuree-Regular"))
 {
-    background.setPosition({ 0, 0 });
+    sprite_background.setPosition({ 0, 0 });
 
-    logo.setOrigin({ 250, 0 });
-    logo.setPosition({ 400, 50 });
+    sprite_logo.setOrigin({ 250, 0 });
+    sprite_logo.setPosition({ 400, 50 });
 
-    textUpdate(start, "Start", 50, 400.f, 550.f);
-    textUpdate(exit, "Exit", 50, 400.f, 630.f);
+    textUpdate(text_start, "Start", 50, 400.f, 550.f);
+    textUpdate(text_exit, "Exit", 50, 400.f, 630.f);
 
-    selected = MenuItem::Start;
+    selected = MainMenuItem::Start;
 
-    current_start_size = max_size;
-    current_exit_size = default_size;
+    current_text_start_size = max_size;
+    current_text_exit_size = default_size;
 
-    target_start_size = max_size;
-    target_exit_size = default_size;
+    target_text_start_size = max_size;
+    target_text_exit_size = default_size;
 }
 
 void MainMenu::centerText(sf::Text& text)
@@ -48,7 +48,7 @@ void MainMenu::textUpdate(sf::Text& text, float char_size, float pos_x, float po
     text.setPosition({ pos_x, pos_y });
 }
 
-MenuItem MainMenu::getSelectedMenuItem() const
+MainMenuItem MainMenu::getSelectedItem() const
 {
     return selected;
 }
@@ -59,18 +59,18 @@ void MainMenu::handleInput(const sf::Event& event)
     {
         if (key->scancode == sf::Keyboard::Scancode::Up)
         {
-            selected = MenuItem::Start;
+            selected = MainMenuItem::Start;
 
-            target_start_size = max_size;
-            target_exit_size = default_size;
+            target_text_start_size = max_size;
+            target_text_exit_size = default_size;
         }
 
         if (key->scancode == sf::Keyboard::Scancode::Down)
         {
-            selected = MenuItem::Exit;
+            selected = MainMenuItem::Exit;
 
-            target_start_size = default_size;
-            target_exit_size = max_size;
+            target_text_start_size = default_size;
+            target_text_exit_size = max_size;
         }
     }
 }
@@ -79,42 +79,42 @@ void MainMenu::update(float delta_time)
 {
     float animation_speed = 150.f;
 
-    if (current_start_size < target_start_size)
+    if (current_text_start_size < target_text_start_size)
     {
-        current_start_size += animation_speed * delta_time;
+        current_text_start_size += animation_speed * delta_time;
 
-        if (current_start_size > target_start_size) current_start_size = max_size;
+        if (current_text_start_size > target_text_start_size) current_text_start_size = max_size;
     }
 
-    if (current_start_size > target_start_size)
+    if (current_text_start_size > target_text_start_size)
     {
-        current_start_size -= animation_speed * delta_time;
+        current_text_start_size -= animation_speed * delta_time;
 
-        if (current_start_size < target_start_size) current_start_size = default_size;
+        if (current_text_start_size < target_text_start_size) current_text_start_size = default_size;
     }
 
-    if (current_exit_size < target_exit_size)
+    if (current_text_exit_size < target_text_exit_size)
     {
-        current_exit_size += animation_speed * delta_time;
+        current_text_exit_size += animation_speed * delta_time;
 
-        if (current_exit_size > target_exit_size) current_exit_size = max_size;
+        if (current_text_exit_size > target_text_exit_size) current_text_exit_size = max_size;
     }
 
-    if (current_exit_size > target_exit_size)
+    if (current_text_exit_size > target_text_exit_size)
     {
-        current_exit_size -= animation_speed * delta_time;
+        current_text_exit_size -= animation_speed * delta_time;
 
-        if (current_exit_size < target_exit_size) current_exit_size = default_size;
+        if (current_text_exit_size < target_text_exit_size) current_text_exit_size = default_size;
     }
 
-    textUpdate(start, current_start_size, 400.f, 550.f);
-    textUpdate(exit, current_exit_size, 400.f, 630.f);
+    textUpdate(text_start, current_text_start_size, 400.f, 550.f);
+    textUpdate(text_exit, current_text_exit_size, 400.f, 630.f);
 }
 
 void MainMenu::render(sf::RenderWindow& window)
 {
-    window.draw(background);
-    window.draw(logo);
-    window.draw(start);
-    window.draw(exit);
+    window.draw(sprite_background);
+    window.draw(sprite_logo);
+    window.draw(text_start);
+    window.draw(text_exit);
 }

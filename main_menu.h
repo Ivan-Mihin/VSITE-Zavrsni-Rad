@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-enum class MenuItem
+enum class MainMenuItem
 {
 	Start,
 	Exit
@@ -10,16 +10,16 @@ enum class MenuItem
 class MainMenu
 {
 private:
-	sf::Sprite background;
-	sf::Sprite logo;
-	sf::Text start, exit;
-	MenuItem selected;
+	sf::Sprite sprite_background, sprite_logo;
+	sf::Text text_start, text_exit;
+
+	MainMenuItem selected;
 
 	const float default_size = 50.f;
 	const float max_size = 65.f;
 
-	float current_start_size, current_exit_size;
-	float target_start_size, target_exit_size;
+	float current_text_start_size, current_text_exit_size;
+	float target_text_start_size, target_text_exit_size;
 
 	void centerText(sf::Text& text);
 	void textUpdate(sf::Text& text, std::string string, float char_size, float pos_x, float pos_y);
@@ -28,7 +28,7 @@ private:
 public:
 	MainMenu();
 
-	MenuItem getSelectedMenuItem() const;
+	MainMenuItem getSelectedItem() const;
 
 	void handleInput(const sf::Event& event);
 	void update(float delta_time);
