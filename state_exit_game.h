@@ -1,12 +1,12 @@
 #pragma once
+#include "exit_game.h"
 #include "state.h"
 #include <SFML/Graphics.hpp>
 
 class StateExitGame : public State
 {
 private:
-    sf::Sprite background;
-    sf::Text text1, text2;
+    ExitGame exit_game;
 
 public:
     StateExitGame();
