@@ -18,14 +18,12 @@ private:
 	const float default_size = 50.f;
 	const float max_size = 65.f;
 
-	float current_start_size = 60.f;
-	float current_exit_size = 50.f;
-
-	float target_start_size = 60.f;
-	float target_exit_size = 50.f;
+	float current_start_size, current_exit_size;
+	float target_start_size, target_exit_size;
 
 	void centerText(sf::Text& text);
-	void textInitialize(sf::Text& text, std::string string, int char_size, float pos_x, float pos_y);
+	void textUpdate(sf::Text& text, std::string string, float char_size, float pos_x, float pos_y);
+	void textUpdate(sf::Text& text, float char_size, float pos_x, float pos_y);
 
 public:
 	MainMenu();

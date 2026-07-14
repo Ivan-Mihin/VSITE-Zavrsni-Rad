@@ -12,10 +12,16 @@ MainMenu::MainMenu() :
     logo.setOrigin({ 250, 0 });
     logo.setPosition({ 400, 50 });
 
-    textInitialize(start, "Start", 50, 400.f, 550.f);
-    textInitialize(exit, "Exit", 50, 400.f, 630.f);
+    textUpdate(start, "Start", 50, 400.f, 550.f);
+    textUpdate(exit, "Exit", 50, 400.f, 630.f);
 
     selected = MenuItem::Start;
+
+    current_start_size = max_size;
+    current_exit_size = default_size;
+
+    target_start_size = max_size;
+    target_exit_size = default_size;
 }
 
 void MainMenu::centerText(sf::Text& text)
@@ -27,18 +33,24 @@ void MainMenu::centerText(sf::Text& text)
         });
 }
 
-MenuItem MainMenu::getSelectedMenuItem() const 
-{
-    return selected;
-}
-
-void MainMenu::textInitialize(sf::Text& text, std::string string, int char_size, float pos_x, float pos_y)
+void MainMenu::textUpdate(sf::Text& text, std::string string, float char_size, float pos_x, float pos_y)
 {
     text.setString(string);
-    text.setCharacterSize(char_size);
-    sf::FloatRect bounds = text.getLocalBounds();
+    text.setCharacterSize(static_cast<unsigned int>(char_size));
     centerText(text);
     text.setPosition({ pos_x, pos_y });
+}
+
+void MainMenu::textUpdate(sf::Text& text, float char_size, float pos_x, float pos_y)
+{
+    text.setCharacterSize(static_cast<unsigned int>(char_size));
+    centerText(text);
+    text.setPosition({ pos_x, pos_y });
+}
+
+MenuItem MainMenu::getSelectedMenuItem() const
+{
+    return selected;
 }
 
 void MainMenu::handleInput(const sf::Event& event)
@@ -65,48 +77,38 @@ void MainMenu::handleInput(const sf::Event& event)
 
 void MainMenu::update(float delta_time)
 {
-    float speed = 150.f;
+    float animation_speed = 150.f;
 
     if (current_start_size < target_start_size)
     {
-        current_start_size += speed * delta_time;
+        current_start_size += animation_speed * delta_time;
 
-        if (current_start_size > target_start_size)
-            current_start_size = max_size;
+        if (current_start_size > target_start_size) current_start_size = max_size;
     }
 
     if (current_start_size > target_start_size)
     {
-        current_start_size -= speed * delta_time;
+        current_start_size -= animation_speed * delta_time;
 
-        if (current_start_size < target_start_size)
-            current_start_size = default_size;
+        if (current_start_size < target_start_size) current_start_size = default_size;
     }
 
     if (current_exit_size < target_exit_size)
     {
-        current_exit_size += speed * delta_time;
+        current_exit_size += animation_speed * delta_time;
 
-        if (current_exit_size > target_exit_size)
-            current_exit_size = max_size;
+        if (current_exit_size > target_exit_size) current_exit_size = max_size;
     }
 
     if (current_exit_size > target_exit_size)
     {
-        current_exit_size -= speed * delta_time;
+        current_exit_size -= animation_speed * delta_time;
 
-        if (current_exit_size < target_exit_size)
-            current_exit_size = default_size;
+        if (current_exit_size < target_exit_size) current_exit_size = default_size;
     }
 
-    start.setCharacterSize(static_cast<unsigned int>(current_start_size));
-    exit.setCharacterSize(static_cast<unsigned int>(current_exit_size));
-
-    centerText(start);
-    centerText(exit);
-
-    start.setPosition({ 400.f, 550.f });
-    exit.setPosition({ 400.f, 630.f });
+    textUpdate(start, current_start_size, 400.f, 550.f);
+    textUpdate(exit, current_exit_size, 400.f, 630.f);
 }
 
 void MainMenu::render(sf::RenderWindow& window)
