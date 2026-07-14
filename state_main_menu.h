@@ -1,13 +1,12 @@
 #pragma once
+#include "main_menu.h"
 #include "state.h"
 #include <SFML/Graphics.hpp>
 
 class StateMainMenu : public State
 {
 private:
-    sf::Sprite background;
-    sf::Sprite logo;
-    sf::Text text1, text2;
+    MainMenu main_menu;
 
 public:
     StateMainMenu();

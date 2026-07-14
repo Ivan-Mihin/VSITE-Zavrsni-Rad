@@ -135,6 +135,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="assets.cpp" />
+    <ClCompile Include="main_menu.cpp" />
     <ClCompile Include="state_exit_game.cpp" />
     <ClCompile Include="state_game_over.cpp" />
     <ClCompile Include="state_main_menu.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="assets.h" />
+    <ClInclude Include="main_menu.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="state_exit_game.h" />
     <ClInclude Include="state_game_over.h" />
