@@ -1,9 +1,11 @@
 #include "assets.h"
 #include "tetris.h"
 
-Tetris::Tetris()
+Tetris::Tetris() :
+    sprite_background(Assets::getInstance().getTexture("background_main_menu")),
+    sprite_board(Assets::getInstance().getTexture("board"))
 {
-    // add initialization later
+    sprite_board.setPosition({ 220, 25 });
 }
 
 void Tetris::handleInput(const sf::Event& event)
@@ -18,5 +20,6 @@ void Tetris::update(float delta_time)
 
 void Tetris::render(sf::RenderWindow& window)
 {
-    // add rendering later
+    window.draw(sprite_background);
+    window.draw(sprite_board);
 }

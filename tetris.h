@@ -5,6 +5,8 @@
 class Tetris
 {
 private:
+	sf::Sprite sprite_background;
+	sf::Sprite sprite_board;
 	std::unique_ptr<Tetromino> tetromino;
 
 public:
