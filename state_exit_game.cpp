@@ -7,6 +7,19 @@ void StateExitGame::handleInput(const sf::Event& event)
 {
     if (const auto* key = event.getIf<sf::Event::KeyPressed>())
     {
+        if (key->scancode == sf::Keyboard::Scancode::Space ||
+            key->scancode == sf::Keyboard::Scancode::Enter)
+        {
+            if (exit_game.getSelectedItem() == ExitGameItem::Yes)
+            {
+                Game::getInstance().getWindow().close();
+            }
+            else if (exit_game.getSelectedItem() == ExitGameItem::No)
+            {
+                Game::getInstance().popState();
+            }
+        }
+
         if (key->scancode == sf::Keyboard::Scancode::Y ||
             key->scancode == sf::Keyboard::Scancode::Z)
         {
