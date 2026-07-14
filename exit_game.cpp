@@ -10,41 +10,22 @@ ExitGame::ExitGame() :
 {
     background.setPosition({ 0, 0 });
 
-    text1.setString("EXIT");
-    text1.setCharacterSize(125);
-    sf::FloatRect bounds1 = text1.getLocalBounds();
-    text1.setOrigin({
-    bounds1.position.x + bounds1.size.x / 2.f,
-    bounds1.position.y + bounds1.size.y / 2.f
-        });
-    text1.setPosition({ 400.f, 150.f });
+    textInitialize(text1, "EXIT", 125, 400.f, 150.f);
+    textInitialize(text2, "GAME?", 125, 400.f, 270.f);
+    textInitialize(text3, "Yes", 50, 400.f, 550.f);
+    textInitialize(text4, "No", 50, 400.f, 630.f);
+}
 
-    text2.setString("GAME?");
-    text2.setCharacterSize(125);
-    sf::FloatRect bounds2 = text2.getLocalBounds();
-    text2.setOrigin({
-    bounds2.position.x + bounds2.size.x / 2.f,
-    bounds2.position.y + bounds2.size.y / 2.f
+void ExitGame::textInitialize(sf::Text& text, std::string string, int char_size, float pos_x, float pos_y) 
+{
+    text.setString(string);
+    text.setCharacterSize(char_size);
+    sf::FloatRect bounds = text.getLocalBounds();
+    text.setOrigin({
+    bounds.position.x + bounds.size.x / 2.f,
+    bounds.position.y + bounds.size.y / 2.f
         });
-    text2.setPosition({ 400.f, 270.f });
-
-    text3.setString("Yes");
-    text3.setCharacterSize(50);
-    sf::FloatRect bounds3 = text3.getLocalBounds();
-    text3.setOrigin({
-    bounds3.position.x + bounds3.size.x / 2.f,
-    bounds3.position.y + bounds3.size.y / 2.f
-        });
-    text3.setPosition({ 400.f, 550.f });
-
-    text4.setString("No");
-    text4.setCharacterSize(50);
-    sf::FloatRect bounds4 = text4.getLocalBounds();
-    text4.setOrigin({
-    bounds4.position.x + bounds4.size.x / 2.f,
-    bounds4.position.y + bounds4.size.y / 2.f
-        });
-    text4.setPosition({ 400.f, 630.f });
+    text.setPosition({ pos_x, pos_y });
 }
 
 void ExitGame::handleInput(const sf::Event& event)
