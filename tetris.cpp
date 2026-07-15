@@ -6,6 +6,8 @@ Tetris::Tetris() :
     sprite_board(Assets::getInstance().getTexture("board"))
 {
     sprite_board.setPosition({ 220, 25 });
+
+    board.assign(BOARD_ROWS, std::vector<int>(BOARD_COLUMNS, 0));
 }
 
 void Tetris::handleInput(const sf::Event& event)

@@ -9,6 +9,11 @@ private:
 	sf::Sprite sprite_board;
 	std::unique_ptr<Tetromino> tetromino;
 
+	const int BOARD_ROWS = 25;
+	const int BOARD_COLUMNS = 12;
+
+	std::vector<std::vector<int>> board;
+
 public:
 	Tetris();
 
