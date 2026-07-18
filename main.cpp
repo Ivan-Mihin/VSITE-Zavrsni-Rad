@@ -3,6 +3,8 @@
 
 int main() 
 {
+    srand(time(nullptr));
+    
     Assets::getInstance().load();
     Game::getInstance().run();
 

@@ -18,6 +18,7 @@ public:
     TetrominoShape getShape() const;
     TetrominoColor getColor() const;
     sf::Vector2i getPosition() const;
+    std::vector<sf::Vector2i> getBlocks() const;
 
     void setPosition(const sf::Vector2i& pos);
 

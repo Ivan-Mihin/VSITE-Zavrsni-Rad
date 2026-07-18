@@ -20,6 +20,18 @@ sf::Vector2i Tetromino::getPosition() const
 	return position;
 }
 
+std::vector<sf::Vector2i> Tetromino::getBlocks() const
+{
+	std::vector<sf::Vector2i> blocks;
+
+	for (int i = 0; i < 4; ++i)
+	{
+		blocks.push_back(position + rotation_states[current_rotation][i]);
+	}
+
+	return blocks;
+}
+
 void Tetromino::setPosition(const sf::Vector2i& position)
 {
 	this->position = position;
