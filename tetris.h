@@ -17,6 +17,8 @@ private:
 public:
 	Tetris();
 
+	void spawnTetromino();
+
 	void handleInput(const sf::Event& event);
 	void update(float delta_time);
 	void render(sf::RenderWindow& window);

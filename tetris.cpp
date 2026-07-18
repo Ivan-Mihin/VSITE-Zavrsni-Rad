@@ -1,5 +1,6 @@
 #include "assets.h"
 #include "tetris.h"
+#include "tetromino_factory.h"
 
 Tetris::Tetris() :
     sprite_background(Assets::getInstance().getTexture("background_main_menu")),
@@ -8,6 +9,15 @@ Tetris::Tetris() :
     sprite_board.setPosition({ 220, 25 });
 
     board.assign(BOARD_ROWS, std::vector<int>(BOARD_COLUMNS, 0));
+}
+
+void Tetris::spawnTetromino()
+{
+    int random = rand() % 7 + 1;
+
+    tetromino = TetrominoFactory::createTetromino(static_cast<TetrominoShape>(random));
+
+    tetromino->setPosition({ 3, 0 });
 }
 
 void Tetris::handleInput(const sf::Event& event)
