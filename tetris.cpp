@@ -11,6 +11,8 @@ Tetris::Tetris() :
     board.assign(BOARD_ROWS, std::vector<int>(BOARD_COLUMNS, 0));
 
     spawnTetromino();
+
+    tetromino_fall_delay = 0.5f;
 }
 
 void Tetris::spawnTetromino()
@@ -20,6 +22,16 @@ void Tetris::spawnTetromino()
     tetromino->setPosition({ 4, 0 });
 }
 
+void Tetris::tetrominoFall()
+{
+    if (tetromino_fall.getElapsedTime().asSeconds() >= tetromino_fall_delay)
+    {
+        sf::Vector2i previous_position = tetromino->getPosition();
+        tetromino->move({ 0, 1 });
+        tetromino_fall.restart();
+    }
+}
+
 void Tetris::handleInput(const sf::Event& event)
 {
     // add user input later
@@ -27,7 +39,7 @@ void Tetris::handleInput(const sf::Event& event)
 
 void Tetris::update(float delta_time)
 {
-    // add game logic updates later
+    tetrominoFall();
 }
 
 void Tetris::render(sf::RenderWindow& window)

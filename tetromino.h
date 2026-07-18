@@ -19,9 +19,10 @@ public:
     TetrominoColor getColor() const;
     sf::Vector2i getPosition() const;
     std::vector<sf::Vector2i> getBlocks() const;
-
-    void setPosition(const sf::Vector2i& pos);
-
     const std::vector<std::vector<sf::Vector2i>>& getRotationStates() const;
+
+    void setPosition(const sf::Vector2i& position);
+
+    void move(const sf::Vector2i& offset);
     void rotate();
 };

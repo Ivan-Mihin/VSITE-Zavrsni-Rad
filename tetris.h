@@ -16,10 +16,13 @@ private:
 	sf::Sprite sprite_tetromino;
 
 	std::unique_ptr<Tetromino> tetromino;
-
 	std::vector<std::vector<int>> board;
 
+	sf::Clock tetromino_fall;
+	float tetromino_fall_delay;
+
 	void spawnTetromino();
+	void tetrominoFall();
 
 public:
 	Tetris();
