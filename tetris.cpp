@@ -29,30 +29,6 @@ void Tetris::spawnTetromino()
     tetromino->setPosition({ 4, 0 });
 }
 
-void Tetris::tetrominoFall()
-{
-    if (tetromino_fall.getElapsedTime().asSeconds() >= tetromino_fall_delay)
-    {
-        sf::Vector2i previous_position = tetromino->getPosition();
-        tetromino->move({ 0, 1 });
-
-        if (board.isValidPosition(tetromino->getBlocks()))
-        {
-            tetromino_fall.restart();
-        }
-        else
-        {
-            // Reset to previous position
-            tetromino->move({ 0,-1 });
-
-            // Write the tetromino's position onto the board
-            board.lockTetromino(tetromino->getBlocks(), static_cast<int>(tetromino->getColor()) + 1);
-
-            spawnTetromino();
-        }
-    }
-}
-
 void Tetris::moveTetromino(const sf::Vector2i& offset)
 {
     tetromino->move(offset);
@@ -94,10 +70,21 @@ void Tetris::hardDropTetromino()
     spawnTetromino();
 }
 
+void Tetris::setSoftDrop(bool active)
+{
+    is_soft_dropping = active;
+}
+
 void Tetris::handleInput(const sf::Event& event)
 {
     if (const auto* key = event.getIf<sf::Event::KeyPressed>())
     {
+        if (key->scancode == sf::Keyboard::Scancode::Down ||
+            key->scancode == sf::Keyboard::Scancode::S)
+        {
+            setSoftDrop(true);
+        }
+
         auto iterator = key_bindings.find(key->scancode);
 
         if (iterator != key_bindings.end())
@@ -105,11 +92,39 @@ void Tetris::handleInput(const sf::Event& event)
             iterator->second->execute();
         }
     }
+
+    if (const auto* key = event.getIf<sf::Event::KeyReleased>())
+    {
+        if (key->scancode == sf::Keyboard::Scancode::Down ||
+            key->scancode == sf::Keyboard::Scancode::S)
+        {
+            setSoftDrop(false);
+        }
+    }
 }
+
 
 void Tetris::update(float delta_time)
 {
-    tetrominoFall();
+    float current_speed = is_soft_dropping ? speed_soft_drop : speed_default;
+
+    if (tetromino_fall.getElapsedTime().asSeconds() >= current_speed)
+    {
+        tetromino->move({ 0, 1 });
+
+        if (!board.isValidPosition(tetromino->getBlocks()))
+        {
+            // Reset to previous position
+            tetromino->move({ 0, -1 });
+
+            // Write the tetromino's position onto the board
+            board.lockTetromino(tetromino->getBlocks(), static_cast<int>(tetromino->getColor()) + 1);
+
+            spawnTetromino();
+        }
+
+        tetromino_fall.restart();
+    }
 }
 
 void Tetris::render(sf::RenderWindow& window)

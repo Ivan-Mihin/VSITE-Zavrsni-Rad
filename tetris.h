@@ -25,8 +25,11 @@ private:
 	sf::Clock tetromino_fall;
 	float tetromino_fall_delay;
 
+	bool is_soft_dropping = false;
+	float speed_default = 1.0f;
+	float speed_soft_drop = 0.05f;
+
 	void spawnTetromino();
-	void tetrominoFall();
 
 public:
 	Tetris();
@@ -34,6 +37,8 @@ public:
 	void moveTetromino(const sf::Vector2i& offset);
 	void rotateTetromino();
 	void hardDropTetromino();
+
+	void setSoftDrop(bool active);
 
 	void handleInput(const sf::Event& event);
 	void update(float delta_time);
