@@ -76,4 +76,26 @@ void Tetris::render(sf::RenderWindow& window)
 
         window.draw(sprite_tetromino);
     }
+
+    // Draw Locked Tetrominoes
+    for (int row = 0; row < board.getRows(); ++row)
+    {
+        for (int column = 0; column < board.getColumns(); ++column)
+        {
+            int color = board.getCell(row, column);
+
+            // Skip if color is 0, needs fixing later
+            if (color == 0) continue;
+
+            sf::Vector2i position = { (color - 1) * TEXTURE_SIZE, 0 };
+            sf::Vector2i size = { TEXTURE_SIZE, TEXTURE_SIZE };
+            sprite_tetromino.setTextureRect(sf::IntRect(position, size));
+
+            float pos_x = static_cast<float>(column * TEXTURE_SIZE + SPRITE_BOARD_OFFSET_X);
+            float pos_y = static_cast<float>(row * TEXTURE_SIZE + SPRITE_BOARD_OFFSET_Y);
+            sprite_tetromino.setPosition({ pos_x, pos_y });
+
+            window.draw(sprite_tetromino);
+        }
+    }
 }
