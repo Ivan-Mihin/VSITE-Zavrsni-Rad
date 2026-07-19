@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="board.cpp" />
+    <ClCompile Include="commands.cpp" />
     <ClCompile Include="exit_game.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
@@ -150,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="audio.h" />
     <ClInclude Include="board.h" />
+    <ClInclude Include="commands.h" />
     <ClInclude Include="exit_game.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="ICommand.h" />

@@ -1,5 +1,8 @@
 #pragma once
+#include <map>
+#include <memory>
 #include "board.h"
+#include "commands.h"
 #include "tetromino.h"
 #include <SFML/Graphics.hpp>
 
@@ -17,6 +20,8 @@ private:
 	std::unique_ptr<Tetromino> tetromino;
 	Board board;
 
+	std::map<sf::Keyboard::Scancode, std::unique_ptr<ICommand>> key_bindings;
+
 	sf::Clock tetromino_fall;
 	float tetromino_fall_delay;
 
@@ -25,6 +30,8 @@ private:
 
 public:
 	Tetris();
+
+	void moveTetromino(const sf::Vector2i& offset);
 
 	void handleInput(const sf::Event& event);
 	void update(float delta_time);

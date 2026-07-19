@@ -12,6 +12,11 @@ Tetris::Tetris() :
     spawnTetromino();
 
     tetromino_fall_delay = 0.5f;
+
+    key_bindings[sf::Keyboard::Scancode::Left] = std::make_unique<CommandMove>(*this, sf::Vector2i(-1, 0));
+    key_bindings[sf::Keyboard::Scancode::A] = std::make_unique<CommandMove>(*this, sf::Vector2i(-1, 0));
+    key_bindings[sf::Keyboard::Scancode::Right] = std::make_unique<CommandMove>(*this, sf::Vector2i(1, 0));
+    key_bindings[sf::Keyboard::Scancode::D] = std::make_unique<CommandMove>(*this, sf::Vector2i(1, 0));
 }
 
 void Tetris::spawnTetromino()
@@ -46,9 +51,28 @@ void Tetris::tetrominoFall()
     }
 }
 
+void Tetris::moveTetromino(const sf::Vector2i& offset)
+{
+    tetromino->move(offset);
+
+    if (!board.isValidPosition(tetromino->getBlocks()))
+    {
+        // Reset to previous position
+        tetromino->move({ -offset.x, -offset.y });
+    }
+}
+
 void Tetris::handleInput(const sf::Event& event)
 {
-    // add user input later
+    if (const auto* key = event.getIf<sf::Event::KeyPressed>())
+    {
+        auto iterator = key_bindings.find(key->scancode);
+
+        if (iterator != key_bindings.end())
+        {
+            iterator->second->execute();
+        }
+    }
 }
 
 void Tetris::update(float delta_time)
