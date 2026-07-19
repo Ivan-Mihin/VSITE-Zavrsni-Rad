@@ -8,7 +8,6 @@ Tetris::Tetris() :
     sprite_tetromino(Assets::getInstance().getTexture("tetromino"))
 {
     sprite_board.setPosition({ 220, 25 });
-    board.assign(BOARD_ROWS, std::vector<int>(BOARD_COLUMNS, 0));
 
     spawnTetromino();
 
@@ -28,7 +27,22 @@ void Tetris::tetrominoFall()
     {
         sf::Vector2i previous_position = tetromino->getPosition();
         tetromino->move({ 0, 1 });
-        tetromino_fall.restart();
+
+        if (board.isValidPosition(tetromino->getBlocks()))
+        {
+            tetromino_fall.restart();
+        }
+        else
+        {
+            // Reset to previous position
+            tetromino->move({ 0,-1 });
+
+            // Write the tetromino's position onto the board
+            board.lockTetromino(tetromino->getBlocks(), static_cast<int>(tetromino->getColor()) + 1);
+
+            // Spawn a new tetromino
+            spawnTetromino();
+        }
     }
 }
 
@@ -56,8 +70,8 @@ void Tetris::render(sf::RenderWindow& window)
         sf::Vector2i size = { TEXTURE_SIZE, TEXTURE_SIZE };
         sprite_tetromino.setTextureRect(sf::IntRect(position, size));
 
-        float pos_x = static_cast<float>(blocks[index].x * TEXTURE_SIZE + BOARD_OFFSET_X);
-        float pos_y = static_cast<float>(blocks[index].y * TEXTURE_SIZE + BOARD_OFFSET_Y);
+        float pos_x = static_cast<float>(blocks[index].x * TEXTURE_SIZE + SPRITE_BOARD_OFFSET_X);
+        float pos_y = static_cast<float>(blocks[index].y * TEXTURE_SIZE + SPRITE_BOARD_OFFSET_Y);
         sprite_tetromino.setPosition({ pos_x, pos_y });
 
         window.draw(sprite_tetromino);
