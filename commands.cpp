@@ -12,3 +12,13 @@ void CommandMove::execute()
 {
     tetris.moveTetromino(direction);
 }
+
+CommandRotate::CommandRotate(Tetris& tetris)
+    : tetris(tetris)
+{
+}
+
+void CommandRotate::execute()
+{
+    tetris.rotateTetromino();
+}

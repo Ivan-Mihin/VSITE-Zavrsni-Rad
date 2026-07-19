@@ -32,6 +32,7 @@ public:
 	Tetris();
 
 	void moveTetromino(const sf::Vector2i& offset);
+	void rotateTetromino();
 
 	void handleInput(const sf::Event& event);
 	void update(float delta_time);

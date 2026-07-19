@@ -17,6 +17,8 @@ Tetris::Tetris() :
     key_bindings[sf::Keyboard::Scancode::A] = std::make_unique<CommandMove>(*this, sf::Vector2i(-1, 0));
     key_bindings[sf::Keyboard::Scancode::Right] = std::make_unique<CommandMove>(*this, sf::Vector2i(1, 0));
     key_bindings[sf::Keyboard::Scancode::D] = std::make_unique<CommandMove>(*this, sf::Vector2i(1, 0));
+    key_bindings[sf::Keyboard::Scancode::Up] = std::make_unique<CommandRotate>(*this);
+    key_bindings[sf::Keyboard::Scancode::W] = std::make_unique<CommandRotate>(*this);
 }
 
 void Tetris::spawnTetromino()
@@ -59,6 +61,19 @@ void Tetris::moveTetromino(const sf::Vector2i& offset)
     {
         // Reset to previous position
         tetromino->move({ -offset.x, -offset.y });
+    }
+}
+
+void Tetris::rotateTetromino()
+{
+    tetromino->rotate();
+
+    if (!board.isValidPosition(tetromino->getBlocks()))
+    {
+        // Reset to previous position
+        tetromino->rotate();
+        tetromino->rotate();
+        tetromino->rotate();
     }
 }
 

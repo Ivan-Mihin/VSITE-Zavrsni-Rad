@@ -14,3 +14,13 @@ public:
     CommandMove(class Tetris& tetris, const sf::Vector2i& direction);
     void execute() override;
 };
+
+class CommandRotate : public ICommand
+{
+private:
+    Tetris& tetris;
+
+public:
+    CommandRotate(Tetris& tetris);
+    void execute() override;
+};
