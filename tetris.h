@@ -16,6 +16,7 @@ private:
 	sf::Sprite sprite_background;
 	sf::Sprite sprite_board;
 	sf::Sprite sprite_tetromino;
+	sf::Sprite sprite_tetromino_ghost;
 
 	std::unique_ptr<Tetromino> tetromino;
 	Board board;
