@@ -33,6 +33,7 @@ public:
 
 	void moveTetromino(const sf::Vector2i& offset);
 	void rotateTetromino();
+	void hardDropTetromino();
 
 	void handleInput(const sf::Event& event);
 	void update(float delta_time);

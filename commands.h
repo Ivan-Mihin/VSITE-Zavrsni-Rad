@@ -24,3 +24,13 @@ public:
     CommandRotate(Tetris& tetris);
     void execute() override;
 };
+
+class CommandHardDrop : public ICommand
+{
+private:
+    Tetris& tetris;
+
+public:
+    CommandHardDrop(Tetris& tetris);
+    void execute() override;
+};

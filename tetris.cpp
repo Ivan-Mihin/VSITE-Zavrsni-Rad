@@ -19,6 +19,7 @@ Tetris::Tetris() :
     key_bindings[sf::Keyboard::Scancode::D] = std::make_unique<CommandMove>(*this, sf::Vector2i(1, 0));
     key_bindings[sf::Keyboard::Scancode::Up] = std::make_unique<CommandRotate>(*this);
     key_bindings[sf::Keyboard::Scancode::W] = std::make_unique<CommandRotate>(*this);
+    key_bindings[sf::Keyboard::Scancode::Space] = std::make_unique<CommandHardDrop>(*this);
 }
 
 void Tetris::spawnTetromino()
@@ -47,7 +48,6 @@ void Tetris::tetrominoFall()
             // Write the tetromino's position onto the board
             board.lockTetromino(tetromino->getBlocks(), static_cast<int>(tetromino->getColor()) + 1);
 
-            // Spawn a new tetromino
             spawnTetromino();
         }
     }
@@ -75,6 +75,23 @@ void Tetris::rotateTetromino()
         tetromino->rotate();
         tetromino->rotate();
     }
+}
+
+void Tetris::hardDropTetromino()
+{
+    while (board.isValidPosition(tetromino->getBlocks()))
+    {
+        tetromino->move({ 0, 1 });
+    }
+
+    // Reset to previous position
+    tetromino->move({ 0, -1 });
+
+    // Write the tetromino's position onto the board
+    board.lockTetromino(tetromino->getBlocks(), static_cast<int>(tetromino->getColor()) + 1);
+
+    tetromino_fall.restart();
+    spawnTetromino();
 }
 
 void Tetris::handleInput(const sf::Event& event)

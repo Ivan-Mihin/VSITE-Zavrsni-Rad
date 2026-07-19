@@ -22,3 +22,13 @@ void CommandRotate::execute()
 {
     tetris.rotateTetromino();
 }
+
+CommandHardDrop::CommandHardDrop(Tetris& tetris)
+    : tetris(tetris)
+{
+}
+
+void CommandHardDrop::execute()
+{
+    tetris.hardDropTetromino();
+}
