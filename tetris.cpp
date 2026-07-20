@@ -1,19 +1,23 @@
 #include "assets.h"
 #include "tetris.h"
 #include "tetromino_factory.h"
+#include <memory>
+#include <vector>
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 
 Tetris::Tetris() :
-    sprite_background(Assets::getInstance().getTexture("background_main_menu")),
+    sprite_background(Assets::getInstance().getTexture("background")),
     sprite_board(Assets::getInstance().getTexture("board")),
     sprite_tetromino(Assets::getInstance().getTexture("tetromino")),
     sprite_tetromino_ghost(Assets::getInstance().getTexture("tetromino_ghost"))
 
 {
-    sprite_board.setPosition({ 220, 25 });
+    sprite_background.setPosition({ 0, 0 });
+    sprite_board.setPosition({ SPRITE_BOARD_OFFSET_X, SPRITE_BOARD_OFFSET_Y });
 
     spawnTetromino();
-
-    tetromino_fall_delay = 0.5f;
 
     key_bindings[sf::Keyboard::Scancode::Left] = std::make_unique<CommandMove>(*this, sf::Vector2i(-1, 0));
     key_bindings[sf::Keyboard::Scancode::A] = std::make_unique<CommandMove>(*this, sf::Vector2i(-1, 0));
@@ -26,7 +30,7 @@ Tetris::Tetris() :
 
 void Tetris::spawnTetromino()
 {
-    int random = rand() % 7 + 1;
+    int random = rand() % 7;
     tetromino = TetrominoFactory::createTetromino(static_cast<TetrominoShape>(random));
     tetromino->setPosition({ 4, 0 });
 }
@@ -129,50 +133,26 @@ void Tetris::update(float delta_time)
     }
 }
 
-void Tetris::render(sf::RenderWindow& window)
+void Tetris::drawActiveTetromino(sf::RenderWindow& window)
 {
-    window.draw(sprite_background);
-    window.draw(sprite_board);
-
-    // Draw Tetromino
     std::vector<sf::Vector2i> blocks = tetromino->getBlocks();
+
+    sf::Vector2i position = { (int)tetromino->getColor() * TEXTURE_SIZE, 0 };
+    sf::Vector2i size = { TEXTURE_SIZE, TEXTURE_SIZE };
+    sprite_tetromino.setTextureRect(sf::IntRect(position, size));
 
     for (int index = 0; index < 4; ++index)
     {
-        sf::Vector2i position = { (int)tetromino->getColor() * TEXTURE_SIZE, 0 };
-        sf::Vector2i size = { TEXTURE_SIZE, TEXTURE_SIZE };
-        sprite_tetromino.setTextureRect(sf::IntRect(position, size));
-
-        float pos_x = static_cast<float>(blocks[index].x * TEXTURE_SIZE + SPRITE_BOARD_OFFSET_X);
-        float pos_y = static_cast<float>(blocks[index].y * TEXTURE_SIZE + SPRITE_BOARD_OFFSET_Y);
-        sprite_tetromino.setPosition({ pos_x, pos_y });
+        float position_x = static_cast<float>(blocks[index].x * TEXTURE_SIZE + SPRITE_BOARD_OFFSET_X);
+        float position_y = static_cast<float>(blocks[index].y * TEXTURE_SIZE + SPRITE_BOARD_OFFSET_Y);
+        sprite_tetromino.setPosition({ position_x, position_y });
 
         window.draw(sprite_tetromino);
     }
+}
 
-    // Draw Locked Tetrominoes
-    for (int row = 0; row < board.getRows(); ++row)
-    {
-        for (int column = 0; column < board.getColumns(); ++column)
-        {
-            int color = board.getCell(row, column);
-
-            // Skip if color is 0, needs fixing later
-            if (color == 0) continue;
-
-            sf::Vector2i position = { (color - 1) * TEXTURE_SIZE, 0 };
-            sf::Vector2i size = { TEXTURE_SIZE, TEXTURE_SIZE };
-            sprite_tetromino.setTextureRect(sf::IntRect(position, size));
-
-            float pos_x = static_cast<float>(column * TEXTURE_SIZE + SPRITE_BOARD_OFFSET_X);
-            float pos_y = static_cast<float>(row * TEXTURE_SIZE + SPRITE_BOARD_OFFSET_Y);
-            sprite_tetromino.setPosition({ pos_x, pos_y });
-
-            window.draw(sprite_tetromino);
-        }
-    }
-
-    // Draw Ghost Tetromino
+void Tetris::drawGhostTetromino(sf::RenderWindow& window)
+{
     std::vector<sf::Vector2i> ghost_blocks = tetromino->getBlocks();
 
     while (board.isValidPosition(ghost_blocks))
@@ -188,16 +168,26 @@ void Tetris::render(sf::RenderWindow& window)
         ghost_blocks[i].y -= 1;
     }
 
-    sf::Vector2i texture_position = { (int)tetromino->getColor() * TEXTURE_SIZE, 0 };
-    sf::Vector2i texture_size = { TEXTURE_SIZE, TEXTURE_SIZE };
-    sprite_tetromino_ghost.setTextureRect(sf::IntRect(texture_position, texture_size));
+    sf::Vector2i position = { (int)tetromino->getColor() * TEXTURE_SIZE, 0 };
+    sf::Vector2i size = { TEXTURE_SIZE, TEXTURE_SIZE };
+    sprite_tetromino_ghost.setTextureRect(sf::IntRect(position, size));
 
     for (int i = 0; i < ghost_blocks.size(); ++i)
     {
         float pos_x = static_cast<float>(ghost_blocks[i].x * TEXTURE_SIZE + SPRITE_BOARD_OFFSET_X);
         float pos_y = static_cast<float>(ghost_blocks[i].y * TEXTURE_SIZE + SPRITE_BOARD_OFFSET_Y);
-
         sprite_tetromino_ghost.setPosition({ pos_x, pos_y });
+
         window.draw(sprite_tetromino_ghost);
     }
+}
+
+void Tetris::render(sf::RenderWindow& window)
+{
+    window.draw(sprite_background);
+    window.draw(sprite_board);
+
+    board.draw(window, sprite_tetromino, TEXTURE_SIZE, SPRITE_BOARD_OFFSET_X, SPRITE_BOARD_OFFSET_Y);
+    drawActiveTetromino(window);
+    drawGhostTetromino(window);
 }

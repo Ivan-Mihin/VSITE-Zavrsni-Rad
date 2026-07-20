@@ -5,32 +5,37 @@
 #include "commands.h"
 #include "tetromino.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 
 class Tetris
 {
 private:
 	const int TEXTURE_SIZE = 30;
-	const int SPRITE_BOARD_OFFSET_X = 220;
-	const int SPRITE_BOARD_OFFSET_Y = 25;
+	const float SPRITE_BOARD_OFFSET_X = 220.f;
+	const float SPRITE_BOARD_OFFSET_Y = 25.f;
 
 	sf::Sprite sprite_background;
 	sf::Sprite sprite_board;
 	sf::Sprite sprite_tetromino;
 	sf::Sprite sprite_tetromino_ghost;
 
-	std::unique_ptr<Tetromino> tetromino;
 	Board board;
-
+	std::unique_ptr<Tetromino> tetromino;
 	std::map<sf::Keyboard::Scancode, std::unique_ptr<ICommand>> key_bindings;
 
 	sf::Clock tetromino_fall;
-	float tetromino_fall_delay;
+	float tetromino_fall_delay = 0.5f;
 
 	bool is_soft_dropping = false;
 	float speed_default = 1.0f;
 	float speed_soft_drop = 0.05f;
 
 	void spawnTetromino();
+	void setSoftDrop(bool active);
+
+	void drawGhostTetromino(sf::RenderWindow& window);
+	void drawActiveTetromino(sf::RenderWindow& window);
 
 public:
 	Tetris();
@@ -38,8 +43,6 @@ public:
 	void moveTetromino(const sf::Vector2i& offset);
 	void rotateTetromino();
 	void hardDropTetromino();
-
-	void setSoftDrop(bool active);
 
 	void handleInput(const sf::Event& event);
 	void update(float delta_time);
