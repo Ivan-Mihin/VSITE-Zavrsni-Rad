@@ -1,7 +1,9 @@
 #include "board.h"
-#include <vector>
-#include <SFML/System.hpp>
+
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+
+#include <vector>
 
 Board::Board()
 {
@@ -60,6 +62,7 @@ void Board::clearFullLines()
 
         if (is_line_full)
         {
+            // Deletes the full line, adds a new one on top, and resets to the same row to recheck it after the shift
             grid.erase(grid.begin() + row);
             grid.insert(grid.begin(), std::vector<int>(COLUMNS, 0));
             ++row;
@@ -69,7 +72,7 @@ void Board::clearFullLines()
 
 bool Board::isGameOver() const
 {
-    for (int row = 0; row <= 2; ++row)
+    for (int row = 0; row <= game_over_row; ++row)
     {
         for (int column = 0; column < COLUMNS; ++column)
         {
@@ -93,14 +96,15 @@ void Board::draw(sf::RenderWindow& window, sf::Sprite& sprite_tetromino, int tex
             {
                 int color = grid[row][column] - 1;
 
+                // Calculates which part of the texture is taken for drawing
                 sf::Vector2i position = { color * texture_size, 0 };
                 sf::Vector2i size = { texture_size, texture_size };
                 sprite_tetromino.setTextureRect(sf::IntRect(position, size));
 
-                float pos_x = static_cast<float>(column * texture_size + offset_x);
-                float pos_y = static_cast<float>(row * texture_size + offset_y);
+                float position_x = static_cast<float>(column * texture_size + offset_x);
+                float position_y = static_cast<float>(row * texture_size + offset_y);
+                sprite_tetromino.setPosition({ position_x, position_y });
 
-                sprite_tetromino.setPosition({ pos_x, pos_y });
                 window.draw(sprite_tetromino);
             }
         }
