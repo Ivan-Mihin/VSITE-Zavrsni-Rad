@@ -75,10 +75,13 @@ void Game::run()
         if (auto current = getCurrentState())
         {
             current->update(delta_time);
-
-            window.clear(sf::Color::Black);
-            current->render(window);
-            window.display();
         }
+
+        window.clear(sf::Color::Black);
+        if (auto current = getCurrentState())
+        {
+            current->render(window);
+        }
+        window.display();
     }
 }

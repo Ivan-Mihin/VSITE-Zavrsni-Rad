@@ -17,7 +17,7 @@ void StateMainMenu::handleInput(const sf::Event& event)
         {
             if (main_menu.getSelectedItem() == MainMenuItem::Start)
             {
-                Game::getInstance().pushState(std::make_unique<StatePlaying>());
+                Game::getInstance().changeState(std::make_unique<StatePlaying>());
             }
             else if (main_menu.getSelectedItem() == MainMenuItem::Exit)
             {

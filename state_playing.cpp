@@ -1,5 +1,6 @@
 #include "game.h"
 #include "state_exit_game.h"
+#include "state_game_over.h"
 #include "state_playing.h"
 #include <memory>
 #include <SFML/Graphics.hpp>
@@ -23,6 +24,11 @@ void StatePlaying::handleInput(const sf::Event& event)
 void StatePlaying::update(float delta_time)
 {
     tetris.update(delta_time);
+
+    if (tetris.isGameOver())
+    {
+        Game::getInstance().changeState(std::make_unique<StateGameOver>());
+    }
 }
 
 void StatePlaying::render(sf::RenderWindow& window)

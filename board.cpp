@@ -57,6 +57,22 @@ void Board::clearFullLines()
     }
 }
 
+bool Board::isGameOver() const
+{
+    for (int row = 0; row <= 2; ++row)
+    {
+        for (int column = 0; column < COLUMNS; ++column)
+        {
+            if (grid[row][column] != 0)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
 void Board::draw(sf::RenderWindow& window, sf::Sprite& sprite_tetromino, int texture_size, float offset_x, float offset_y)
 {
     for (int row = 0; row < ROWS; ++row)

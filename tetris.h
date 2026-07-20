@@ -40,6 +40,8 @@ private:
 public:
 	Tetris();
 
+	bool isGameOver() const;
+
 	void moveTetromino(const sf::Vector2i& offset);
 	void rotateTetromino();
 	void hardDropTetromino();

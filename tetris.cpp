@@ -70,6 +70,7 @@ void Tetris::hardDropTetromino()
     tetromino->move({ 0, -1 });
 
     board.lockTetromino(tetromino->getBlocks(), static_cast<int>(tetromino->getColor()) + 1);
+    isGameOver();
     board.clearFullLines();
 
     tetromino_fall.restart();
@@ -109,6 +110,10 @@ void Tetris::handleInput(const sf::Event& event)
     }
 }
 
+bool Tetris::isGameOver() const
+{
+    return board.isGameOver();
+}
 
 void Tetris::update(float delta_time)
 {
@@ -124,6 +129,7 @@ void Tetris::update(float delta_time)
             tetromino->move({ 0, -1 });
 
             board.lockTetromino(tetromino->getBlocks(), static_cast<int>(tetromino->getColor()) + 1);
+            isGameOver();
             board.clearFullLines();
 
             spawnTetromino();
