@@ -1,8 +1,11 @@
 #include "assets.h"
 #include "main_menu.h"
+#include <string>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
 MainMenu::MainMenu() :
-    sprite_background(Assets::getInstance().getTexture("background_main_menu")),
+    sprite_background(Assets::getInstance().getTexture("background")),
     sprite_logo(Assets::getInstance().getTexture("logo_tetris")),
     text_start(Assets::getInstance().getFont("BaiJamjuree-Regular")),
     text_exit(Assets::getInstance().getFont("BaiJamjuree-Regular"))
@@ -27,10 +30,7 @@ MainMenu::MainMenu() :
 void MainMenu::centerText(sf::Text& text)
 {
     sf::FloatRect bounds = text.getLocalBounds();
-    text.setOrigin({
-        bounds.position.x + bounds.size.x / 2.f,
-        bounds.position.y + bounds.size.y / 2.f
-        });
+    text.setOrigin({ bounds.position.x + bounds.size.x / 2.f, bounds.position.y + bounds.size.y / 2.f });
 }
 
 void MainMenu::textUpdate(sf::Text& text, std::string string, float char_size, float pos_x, float pos_y)

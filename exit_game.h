@@ -1,5 +1,7 @@
 #pragma once
+#include <string>
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
 enum class ExitGameItem
 {

@@ -1,4 +1,6 @@
 #include "state_game_over.h"
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
 void StateGameOver::handleInput(const sf::Event& event)
 {

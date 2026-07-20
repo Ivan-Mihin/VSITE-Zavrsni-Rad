@@ -1,4 +1,6 @@
 #include "tetromino.h"
+#include <vector>
+#include <SFML/System.hpp>
 
 TetrominoShape Tetromino::getShape() const
 {

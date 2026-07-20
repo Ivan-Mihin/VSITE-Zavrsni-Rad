@@ -2,6 +2,7 @@
 #include "main_menu.h"
 #include "state.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
 class StateMainMenu : public State
 {

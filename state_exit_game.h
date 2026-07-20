@@ -2,6 +2,7 @@
 #include "exit_game.h"
 #include "state.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
 class StateExitGame : public State
 {

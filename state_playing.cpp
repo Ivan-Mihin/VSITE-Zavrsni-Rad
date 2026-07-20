@@ -1,13 +1,11 @@
-#include "assets.h"
 #include "game.h"
 #include "state_exit_game.h"
 #include "state_playing.h"
+#include <memory>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
-StatePlaying::StatePlaying() :
-    background(Assets::getInstance().getTexture("background_playing"))
-{
-    background.setPosition({ 0, 0 });
-}
+StatePlaying::StatePlaying() {}
 
 void StatePlaying::handleInput(const sf::Event& event)
 {
@@ -29,6 +27,5 @@ void StatePlaying::update(float delta_time)
 
 void StatePlaying::render(sf::RenderWindow& window)
 {
-    window.draw(background);
     tetris.render(window);
 }

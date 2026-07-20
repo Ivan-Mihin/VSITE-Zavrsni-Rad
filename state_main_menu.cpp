@@ -2,6 +2,9 @@
 #include "state_exit_game.h"
 #include "state_main_menu.h"
 #include "state_playing.h"
+#include <memory>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
 StateMainMenu::StateMainMenu() {}
 

@@ -1,5 +1,9 @@
 #include "game.h"
 #include "state_main_menu.h"
+#include <memory>
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 
 Game::Game()
     : window(sf::VideoMode({ 800, 800 }), "Tetris!", sf::Style::Titlebar | sf::Style::Close)

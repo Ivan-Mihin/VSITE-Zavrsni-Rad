@@ -1,6 +1,9 @@
 #include "assets.h"
 #include <iostream>
 #include <stdexcept>
+#include <string>
+#include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 
 Assets::Assets() {}
 
@@ -15,14 +18,8 @@ void Assets::load()
     try
     {
         // Textures
-        if (!textures["background_game_over"].loadFromFile("Assets/Textures/background_game_over.png"))
-            throw std::runtime_error("Failed to load background_game_over.png");
-        if (!textures["background_main_menu"].loadFromFile("Assets/Textures/background_main_menu.png"))
-            throw std::runtime_error("Failed to load background_main_menu.png");
-        if (!textures["background_main_menu_paused"].loadFromFile("Assets/Textures/background_main_menu_paused.png"))
-            throw std::runtime_error("Failed to load background_main_menu_paused.png");
-        if (!textures["background_playing"].loadFromFile("Assets/Textures/background_playing.png"))
-            throw std::runtime_error("Failed to load background_playing.png");
+        if (!textures["background"].loadFromFile("Assets/Textures/background.png"))
+            throw std::runtime_error("Failed to load background.png");
         if (!textures["board"].loadFromFile("Assets/Textures/board.png"))
             throw std::runtime_error("Failed to load board.png");
         if (!textures["game_over_line"].loadFromFile("Assets/Textures/game_over_line.png"))

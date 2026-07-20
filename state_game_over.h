@@ -1,6 +1,7 @@
 #pragma once
 #include "state.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
 class StateGameOver : public State
 {
