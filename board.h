@@ -14,6 +14,9 @@ private:
 public:
     Board();
 
+    int getRows() const;
+    int getColumns() const;
+
     bool isValidPosition(const std::vector<sf::Vector2i>& tetromino) const;
     void lockTetromino(const std::vector<sf::Vector2i>& tetromino, int color);
     void clearFullLines();
