@@ -11,11 +11,12 @@ Tetris::Tetris() :
     sprite_background(Assets::getInstance().getTexture("background")),
     sprite_board(Assets::getInstance().getTexture("board")),
     sprite_tetromino(Assets::getInstance().getTexture("tetromino")),
-    sprite_tetromino_ghost(Assets::getInstance().getTexture("tetromino_ghost"))
-
+    sprite_tetromino_ghost(Assets::getInstance().getTexture("tetromino_ghost")),
+    sprite_game_over_line(Assets::getInstance().getTexture("game_over_line"))
 {
     sprite_background.setPosition({ 0, 0 });
     sprite_board.setPosition({ SPRITE_BOARD_OFFSET_X, SPRITE_BOARD_OFFSET_Y });
+    sprite_game_over_line.setPosition({ SPRITE_BOARD_OFFSET_X, SPRITE_BOARD_OFFSET_Y + (2 * TEXTURE_SIZE)});
 
     spawnTetromino();
 
@@ -192,6 +193,7 @@ void Tetris::render(sf::RenderWindow& window)
 {
     window.draw(sprite_background);
     window.draw(sprite_board);
+    window.draw(sprite_game_over_line);
 
     board.draw(window, sprite_tetromino, TEXTURE_SIZE, SPRITE_BOARD_OFFSET_X, SPRITE_BOARD_OFFSET_Y);
     drawActiveTetromino(window);
