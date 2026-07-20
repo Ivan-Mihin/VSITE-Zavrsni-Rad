@@ -69,8 +69,8 @@ void Tetris::hardDropTetromino()
     // Reset to previous position
     tetromino->move({ 0, -1 });
 
-    // Write the tetromino's position onto the board
     board.lockTetromino(tetromino->getBlocks(), static_cast<int>(tetromino->getColor()) + 1);
+    board.clearFullLines();
 
     tetromino_fall.restart();
     spawnTetromino();
@@ -123,8 +123,8 @@ void Tetris::update(float delta_time)
             // Reset to previous position
             tetromino->move({ 0, -1 });
 
-            // Write the tetromino's position onto the board
             board.lockTetromino(tetromino->getBlocks(), static_cast<int>(tetromino->getColor()) + 1);
+            board.clearFullLines();
 
             spawnTetromino();
         }

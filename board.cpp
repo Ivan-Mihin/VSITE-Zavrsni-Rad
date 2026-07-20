@@ -33,6 +33,30 @@ void Board::lockTetromino(const std::vector<sf::Vector2i>& tetromino, int color)
     }
 }
 
+void Board::clearFullLines()
+{
+    for (int row = ROWS - 1; row >= 0; --row)
+    {
+        bool is_line_full = true;
+
+        for (int column = 0; column < COLUMNS; ++column)
+        {
+            if (grid[row][column] == 0)
+            {
+                is_line_full = false;
+                break;
+            }
+        }
+
+        if (is_line_full)
+        {
+            grid.erase(grid.begin() + row);
+            grid.insert(grid.begin(), std::vector<int>(COLUMNS, 0));
+            ++row;
+        }
+    }
+}
+
 void Board::draw(sf::RenderWindow& window, sf::Sprite& sprite_tetromino, int texture_size, float offset_x, float offset_y)
 {
     for (int row = 0; row < ROWS; ++row)
