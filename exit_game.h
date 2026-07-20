@@ -1,7 +1,9 @@
 #pragma once
-#include <string>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+
+#include <string>
 
 enum class ExitGameItem
 {
@@ -12,26 +14,39 @@ enum class ExitGameItem
 class ExitGame
 {
 private:
+	// Constants
+	const float ANIMATION_SPEED = 150.f;
+	const float TEXT_DEFAULT_SIZE = 50.f;
+	const float TEXT_MAX_SIZE = 65.f;
+
+	// User Interface
 	sf::Sprite sprite_background;
-	sf::Text text_exit, text_game, text_yes, text_no;
+	sf::Text text_exit;
+	sf::Text text_game;
+	sf::Text text_yes;
+	sf::Text text_no;
 
-	ExitGameItem selected;
+	// Menu State
+	ExitGameItem selected = ExitGameItem::Yes;
 
-	const float default_size = 50.f;
-	const float max_size = 65.f;
+	// Text Animation
+	float text_yes_current_size;
+	float text_yes_target_size;
+	float text_no_current_size;
+	float text_no_target_size;
 
-	float current_text_yes_size, current_text_no_size;
-	float target_text_yes_size, target_text_no_size;
-
+	// User Interface
 	void centerText(sf::Text& text);
-	void textUpdate(sf::Text& text, std::string string, float char_size, float pos_x, float pos_y);
-	void textUpdate(sf::Text& text, float char_size, float pos_x, float pos_y);
+	void textUpdate(sf::Text& text, std::string string, float character_size, float position_x, float position_y);
+	void textUpdate(sf::Text& text, float character_size, float position_x, float position_y);
 
 public:
 	ExitGame();
 
+	// Menu State
 	ExitGameItem getSelectedItem() const;
 
+	// Game Loop
 	void handleInput(const sf::Event& event);
 	void update(float delta_time);
 	void render(sf::RenderWindow& window);

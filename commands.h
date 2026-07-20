@@ -1,5 +1,7 @@
 #pragma once
+
 #include "ICommand.h"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 

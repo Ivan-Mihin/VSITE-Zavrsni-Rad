@@ -1,8 +1,10 @@
 #include "assets.h"
 #include "exit_game.h"
-#include <string>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+
+#include <string>
 
 ExitGame::ExitGame() :
     sprite_background(Assets::getInstance().getTexture("background")),
@@ -18,13 +20,10 @@ ExitGame::ExitGame() :
     textUpdate(text_yes, "Yes", 50, 400.f, 550.f);
     textUpdate(text_no, "No", 50, 400.f, 630.f);
 
-    selected = ExitGameItem::Yes;
-
-    current_text_yes_size = max_size;
-    current_text_no_size = default_size;
-
-    target_text_yes_size = max_size;
-    target_text_no_size = default_size;
+    text_yes_current_size = TEXT_MAX_SIZE;
+    text_yes_target_size = TEXT_MAX_SIZE;
+    text_no_current_size = TEXT_DEFAULT_SIZE;
+    text_no_target_size = TEXT_DEFAULT_SIZE;
 }
 
 void ExitGame::centerText(sf::Text& text)
@@ -33,19 +32,19 @@ void ExitGame::centerText(sf::Text& text)
     text.setOrigin({ bounds.position.x + bounds.size.x / 2.f, bounds.position.y + bounds.size.y / 2.f });
 }
 
-void ExitGame::textUpdate(sf::Text& text, std::string string, float char_size, float pos_x, float pos_y)
+void ExitGame::textUpdate(sf::Text& text, std::string string, float character_size, float position_x, float position_y)
 {
     text.setString(string);
-    text.setCharacterSize(static_cast<unsigned int>(char_size));
+    text.setCharacterSize(static_cast<unsigned int>(character_size));
     centerText(text);
-    text.setPosition({ pos_x, pos_y });
+    text.setPosition({ position_x, position_y });
 }
 
-void ExitGame::textUpdate(sf::Text& text, float char_size, float pos_x, float pos_y)
+void ExitGame::textUpdate(sf::Text& text, float character_size, float position_x, float position_y)
 {
-    text.setCharacterSize(static_cast<unsigned int>(char_size));
+    text.setCharacterSize(static_cast<unsigned int>(character_size));
     centerText(text);
-    text.setPosition({ pos_x, pos_y });
+    text.setPosition({ position_x, position_y });
 }
 
 ExitGameItem ExitGame::getSelectedItem() const
@@ -61,54 +60,54 @@ void ExitGame::handleInput(const sf::Event& event)
         {
             selected = ExitGameItem::Yes;
 
-            target_text_yes_size = max_size;
-            target_text_no_size = default_size;
+            text_yes_target_size = TEXT_MAX_SIZE;
+            text_no_target_size = TEXT_DEFAULT_SIZE;
         }
 
         if (key->scancode == sf::Keyboard::Scancode::Down)
         {
             selected = ExitGameItem::No;
 
-            target_text_yes_size = default_size;
-            target_text_no_size = max_size;
+            text_yes_target_size = TEXT_DEFAULT_SIZE;
+            text_no_target_size = TEXT_MAX_SIZE;
         }
     }
 }
 
 void ExitGame::update(float delta_time)
 {
-    float animation_speed = 150.f;
-
-    if (current_text_yes_size < target_text_yes_size)
+    // Increase text size until it reaches max size
+    if (text_yes_current_size < text_yes_target_size)
     {
-        current_text_yes_size += animation_speed * delta_time;
+        text_yes_current_size += ANIMATION_SPEED * delta_time;
 
-        if (current_text_yes_size > target_text_yes_size) current_text_yes_size = max_size;
+        if (text_yes_current_size > text_yes_target_size) text_yes_current_size = TEXT_MAX_SIZE;
     }
 
-    if (current_text_yes_size > target_text_yes_size)
+    if (text_no_current_size < text_no_target_size)
     {
-        current_text_yes_size -= animation_speed * delta_time;
+        text_no_current_size += ANIMATION_SPEED * delta_time;
 
-        if (current_text_yes_size < target_text_yes_size) current_text_yes_size = default_size;
+        if (text_no_current_size > text_no_target_size) text_no_current_size = TEXT_MAX_SIZE;
     }
 
-    if (current_text_no_size < target_text_no_size)
+    // Decrease text size until it reaches default size
+    if (text_yes_current_size > text_yes_target_size)
     {
-        current_text_no_size += animation_speed * delta_time;
+        text_yes_current_size -= ANIMATION_SPEED * delta_time;
 
-        if (current_text_no_size > target_text_no_size) current_text_no_size = max_size;
+        if (text_yes_current_size < text_yes_target_size) text_yes_current_size = TEXT_DEFAULT_SIZE;
     }
 
-    if (current_text_no_size > target_text_no_size)
+    if (text_no_current_size > text_no_target_size)
     {
-        current_text_no_size -= animation_speed * delta_time;
+        text_no_current_size -= ANIMATION_SPEED * delta_time;
 
-        if (current_text_no_size < target_text_no_size) current_text_no_size = default_size;
+        if (text_no_current_size < text_no_target_size) text_no_current_size = TEXT_DEFAULT_SIZE;
     }
 
-    textUpdate(text_yes, current_text_yes_size, 400.f, 550.f);
-    textUpdate(text_no, current_text_no_size, 400.f, 630.f);
+    textUpdate(text_yes, text_yes_current_size, 400.f, 550.f);
+    textUpdate(text_no, text_no_current_size, 400.f, 630.f);
 }
 
 void ExitGame::render(sf::RenderWindow& window)

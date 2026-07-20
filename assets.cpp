@@ -1,9 +1,11 @@
 #include "assets.h"
+
+#include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
+
 #include <iostream>
 #include <stdexcept>
 #include <string>
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
 
 Assets::Assets() {}
 

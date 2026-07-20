@@ -1,6 +1,8 @@
 #pragma once
+
 #include "state.h"
 #include "tetris.h"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 

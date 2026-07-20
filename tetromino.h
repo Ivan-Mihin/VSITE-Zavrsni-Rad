@@ -1,7 +1,10 @@
 #pragma once
+
 #include "tetromino_enums.h"
-#include <vector>
+
 #include <SFML/System.hpp>
+
+#include <vector>
 
 class Tetromino 
 {

@@ -1,6 +1,8 @@
 #pragma once
+
 #include "main_menu.h"
 #include "state.h"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 

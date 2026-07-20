@@ -126,7 +126,7 @@ void Tetris::drawLockDelayBars(sf::RenderWindow& window)
 
     float elapsed = clock_lock_delay.getElapsedTime().asSeconds();
     float progress = std::clamp(elapsed / LOCK_DELAY_TIME, 0.0f, 1.0f);
-    float max_height = board.getRows() * TEXTURE_SIZE;
+    float max_height = board.getRows() * static_cast<float>(TEXTURE_SIZE);
     float current_height = max_height * (1.0f - progress);
 
     lock_delay_bar_left.setSize({ 15.f, current_height });

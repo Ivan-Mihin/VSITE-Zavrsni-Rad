@@ -1,7 +1,9 @@
 #pragma once
+
+#include <SFML/Audio.hpp>
+
 #include <string>
 #include <unordered_map>
-#include <SFML/Audio.hpp>
 
 class Audio
 {

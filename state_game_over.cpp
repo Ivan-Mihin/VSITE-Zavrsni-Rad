@@ -2,8 +2,11 @@
 #include "state_game_over.h"
 #include "state_exit_game.h"
 #include "state_playing.h"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+
+#include <memory>
 
 StateGameOver::StateGameOver() {}
 

@@ -1,6 +1,7 @@
 #include "tetromino.h"
 #include "tetromino_factory.h"
 #include "tetromino_shapes.h"
+
 #include <memory>
 
 std::unique_ptr<Tetromino> TetrominoFactory::createTetromino(TetrominoShape shape)

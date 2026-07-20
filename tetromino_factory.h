@@ -1,6 +1,8 @@
 #pragma once
+
 #include "tetromino.h"
 #include "tetromino_enums.h"
+
 #include <memory>
 
 class TetrominoFactory 

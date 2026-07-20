@@ -1,9 +1,11 @@
 #include "game.h"
 #include "state_main_menu.h"
-#include <memory>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
+
+#include <memory>
 
 Game::Game()
     : window(sf::VideoMode({ 800, 800 }), "Tetris!", sf::Style::Titlebar | sf::Style::Close)
@@ -78,10 +80,12 @@ void Game::run()
         }
 
         window.clear(sf::Color::Black);
+
         if (auto current = getCurrentState())
         {
             current->render(window);
         }
+
         window.display();
     }
 }

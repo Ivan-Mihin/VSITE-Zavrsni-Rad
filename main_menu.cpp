@@ -1,8 +1,10 @@
 #include "assets.h"
 #include "main_menu.h"
-#include <string>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+
+#include <string>
 
 MainMenu::MainMenu() :
     sprite_background(Assets::getInstance().getTexture("background")),
@@ -18,13 +20,10 @@ MainMenu::MainMenu() :
     textUpdate(text_start, "Start", 50, 400.f, 550.f);
     textUpdate(text_exit, "Exit", 50, 400.f, 630.f);
 
-    selected = MainMenuItem::Start;
-
-    current_text_start_size = max_size;
-    current_text_exit_size = default_size;
-
-    target_text_start_size = max_size;
-    target_text_exit_size = default_size;
+    text_start_current_size = TEXT_MAX_SIZE;
+    text_start_target_size = TEXT_MAX_SIZE;
+    text_exit_current_size = TEXT_DEFAULT_SIZE;
+    text_exit_target_size = TEXT_DEFAULT_SIZE;
 }
 
 void MainMenu::centerText(sf::Text& text)
@@ -33,19 +32,19 @@ void MainMenu::centerText(sf::Text& text)
     text.setOrigin({ bounds.position.x + bounds.size.x / 2.f, bounds.position.y + bounds.size.y / 2.f });
 }
 
-void MainMenu::textUpdate(sf::Text& text, std::string string, float char_size, float pos_x, float pos_y)
+void MainMenu::textUpdate(sf::Text& text, std::string string, float character_size, float position_x, float position_y)
 {
     text.setString(string);
-    text.setCharacterSize(static_cast<unsigned int>(char_size));
+    text.setCharacterSize(static_cast<unsigned int>(character_size));
     centerText(text);
-    text.setPosition({ pos_x, pos_y });
+    text.setPosition({ position_x, position_y });
 }
 
-void MainMenu::textUpdate(sf::Text& text, float char_size, float pos_x, float pos_y)
+void MainMenu::textUpdate(sf::Text& text, float character_size, float position_x, float position_y)
 {
-    text.setCharacterSize(static_cast<unsigned int>(char_size));
+    text.setCharacterSize(static_cast<unsigned int>(character_size));
     centerText(text);
-    text.setPosition({ pos_x, pos_y });
+    text.setPosition({ position_x, position_y });
 }
 
 MainMenuItem MainMenu::getSelectedItem() const
@@ -61,54 +60,54 @@ void MainMenu::handleInput(const sf::Event& event)
         {
             selected = MainMenuItem::Start;
 
-            target_text_start_size = max_size;
-            target_text_exit_size = default_size;
+            text_start_target_size = TEXT_MAX_SIZE;
+            text_exit_target_size = TEXT_DEFAULT_SIZE;
         }
 
         if (key->scancode == sf::Keyboard::Scancode::Down)
         {
             selected = MainMenuItem::Exit;
 
-            target_text_start_size = default_size;
-            target_text_exit_size = max_size;
+            text_start_target_size = TEXT_DEFAULT_SIZE;
+            text_exit_target_size = TEXT_MAX_SIZE;
         }
     }
 }
 
 void MainMenu::update(float delta_time)
 {
-    float animation_speed = 150.f;
-
-    if (current_text_start_size < target_text_start_size)
+    // Increase text size until it reaches max size
+    if (text_start_current_size < text_start_target_size)
     {
-        current_text_start_size += animation_speed * delta_time;
+        text_start_current_size += ANIMATION_SPEED * delta_time;
 
-        if (current_text_start_size > target_text_start_size) current_text_start_size = max_size;
+        if (text_start_current_size > text_start_target_size) text_start_current_size = TEXT_MAX_SIZE;
     }
 
-    if (current_text_start_size > target_text_start_size)
+    if (text_start_current_size > text_start_target_size)
     {
-        current_text_start_size -= animation_speed * delta_time;
+        text_start_current_size -= ANIMATION_SPEED * delta_time;
 
-        if (current_text_start_size < target_text_start_size) current_text_start_size = default_size;
+        if (text_start_current_size < text_start_target_size) text_start_current_size = TEXT_DEFAULT_SIZE;
     }
 
-    if (current_text_exit_size < target_text_exit_size)
+    // Decrease text size until it reaches default size
+    if (text_exit_current_size < text_exit_target_size)
     {
-        current_text_exit_size += animation_speed * delta_time;
+        text_exit_current_size += ANIMATION_SPEED * delta_time;
 
-        if (current_text_exit_size > target_text_exit_size) current_text_exit_size = max_size;
+        if (text_exit_current_size > text_exit_target_size) text_exit_current_size = TEXT_MAX_SIZE;
     }
 
-    if (current_text_exit_size > target_text_exit_size)
+    if (text_exit_current_size > text_exit_target_size)
     {
-        current_text_exit_size -= animation_speed * delta_time;
+        text_exit_current_size -= ANIMATION_SPEED * delta_time;
 
-        if (current_text_exit_size < target_text_exit_size) current_text_exit_size = default_size;
+        if (text_exit_current_size < text_exit_target_size) text_exit_current_size = TEXT_DEFAULT_SIZE;
     }
 
-    textUpdate(text_start, current_text_start_size, 400.f, 550.f);
-    textUpdate(text_exit, current_text_exit_size, 400.f, 630.f);
+    textUpdate(text_start, text_start_current_size, 400.f, 550.f);
+    textUpdate(text_exit, text_exit_current_size, 400.f, 630.f);
 }
 
 void MainMenu::render(sf::RenderWindow& window)

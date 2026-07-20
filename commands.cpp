@@ -1,5 +1,6 @@
 #include "commands.h"
 #include "tetris.h"
+
 #include <SFML/System.hpp>
 
 CommandMove::CommandMove(Tetris& tetris, const sf::Vector2i& direction) :

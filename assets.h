@@ -1,8 +1,10 @@
 #pragma once
-#include <string>
-#include <unordered_map>
+
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+
+#include <string>
+#include <unordered_map>
 
 class Assets
 {

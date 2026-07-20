@@ -1,6 +1,8 @@
 #pragma once
+
 #include "game_over.h"
 #include "state.h"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 

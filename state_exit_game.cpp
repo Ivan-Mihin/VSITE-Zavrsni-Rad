@@ -1,5 +1,6 @@
 #include "game.h"
 #include "state_exit_game.h"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
