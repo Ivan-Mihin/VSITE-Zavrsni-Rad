@@ -27,6 +27,9 @@ Tetris::Tetris() :
     key_bindings[sf::Keyboard::Scancode::Up] = std::make_unique<CommandRotate>(*this);
     key_bindings[sf::Keyboard::Scancode::W] = std::make_unique<CommandRotate>(*this);
     key_bindings[sf::Keyboard::Scancode::Space] = std::make_unique<CommandHardDrop>(*this);
+
+    lock_delay_bar_left.setFillColor(sf::Color(255, 255, 255, 255));
+    lock_delay_bar_right.setFillColor(sf::Color(255, 255, 255, 255));
 }
 
 void Tetris::spawnTetromino()
@@ -45,6 +48,10 @@ void Tetris::moveTetromino(const sf::Vector2i& offset)
         // Reset to previous position
         tetromino->move({ -offset.x, -offset.y });
     }
+    else
+    {
+        resetLockDelay();
+    }
 }
 
 void Tetris::rotateTetromino()
@@ -57,6 +64,10 @@ void Tetris::rotateTetromino()
         tetromino->rotate();
         tetromino->rotate();
         tetromino->rotate();
+    }
+    else
+    {
+        resetLockDelay();
     }
 }
 
@@ -111,6 +122,28 @@ void Tetris::handleInput(const sf::Event& event)
     }
 }
 
+bool Tetris::checkTetrominoGrounded() const
+{
+    std::vector<sf::Vector2i> blocks = tetromino->getBlocks();
+
+    for (int i = 0; i < blocks.size(); ++i)
+    {
+        blocks[i].y += 1;
+    }
+
+    return !board.isValidPosition(blocks);
+}
+
+void Tetris::resetLockDelay()
+{
+    is_tetromino_grounded = checkTetrominoGrounded();
+
+    if (is_tetromino_grounded)
+    {
+        lock_delay_clock.restart();
+    }
+}
+
 bool Tetris::isGameOver() const
 {
     return board.isGameOver();
@@ -118,6 +151,31 @@ bool Tetris::isGameOver() const
 
 void Tetris::update(float delta_time)
 {
+    if (checkTetrominoGrounded())
+    {
+        if (!is_tetromino_grounded)
+        {
+            is_tetromino_grounded = true;
+            lock_delay_clock.restart();
+        }
+
+        if (lock_delay_clock.getElapsedTime().asSeconds() >= lock_delay_time)
+        {
+            board.lockTetromino(tetromino->getBlocks(), static_cast<int>(tetromino->getColor()) + 1);
+            isGameOver();
+            board.clearFullLines();
+
+            is_tetromino_grounded = false;
+            tetromino_fall.restart();
+            spawnTetromino();
+            return;
+        }
+    }
+    else
+    {
+        is_tetromino_grounded = false;
+    }
+
     float current_speed = is_soft_dropping ? speed_soft_drop : speed_default;
 
     if (tetromino_fall.getElapsedTime().asSeconds() >= current_speed)
@@ -129,11 +187,11 @@ void Tetris::update(float delta_time)
             // Reset to previous position
             tetromino->move({ 0, -1 });
 
-            board.lockTetromino(tetromino->getBlocks(), static_cast<int>(tetromino->getColor()) + 1);
-            isGameOver();
-            board.clearFullLines();
-
-            spawnTetromino();
+            if (!is_tetromino_grounded)
+            {
+                is_tetromino_grounded = true;
+                lock_delay_clock.restart();
+            }
         }
 
         tetromino_fall.restart();
@@ -189,13 +247,39 @@ void Tetris::drawGhostTetromino(sf::RenderWindow& window)
     }
 }
 
+void Tetris::drawLockDelayBars(sf::RenderWindow& window)
+{
+    if (!is_tetromino_grounded) return;
+
+    float elapsed = lock_delay_clock.getElapsedTime().asSeconds();
+    float progress = std::clamp(elapsed / lock_delay_time, 0.0f, 1.0f);
+    float max_height = 25 * TEXTURE_SIZE;
+    float current_height = max_height * (1.0f - progress);
+
+    lock_delay_bar_left.setSize({ 15.f, current_height });
+    lock_delay_bar_left.setOrigin({ 0.f, current_height });
+    lock_delay_bar_right.setSize({ 15.f, current_height });
+    lock_delay_bar_right.setOrigin({ 0.f, current_height });
+
+    float left_bar_x = SPRITE_BOARD_OFFSET_X - TEXTURE_SIZE;
+    float left_bar_y = SPRITE_BOARD_OFFSET_Y + max_height;
+    float right_bar_x = SPRITE_BOARD_OFFSET_X + (TEXTURE_SIZE * 12) + (TEXTURE_SIZE / 2);
+    float right_bar_y = SPRITE_BOARD_OFFSET_Y + max_height;
+
+    lock_delay_bar_left.setPosition({ left_bar_x, left_bar_y });
+    lock_delay_bar_right.setPosition({ right_bar_x, right_bar_y });
+
+    window.draw(lock_delay_bar_left);
+    window.draw(lock_delay_bar_right);
+}
+
 void Tetris::render(sf::RenderWindow& window)
 {
     window.draw(sprite_background);
     window.draw(sprite_board);
     window.draw(sprite_game_over_line);
-
     board.draw(window, sprite_tetromino, TEXTURE_SIZE, SPRITE_BOARD_OFFSET_X, SPRITE_BOARD_OFFSET_Y);
     drawActiveTetromino(window);
     drawGhostTetromino(window);
+    drawLockDelayBars(window);
 }

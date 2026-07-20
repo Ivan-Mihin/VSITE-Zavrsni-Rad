@@ -32,11 +32,21 @@ private:
 	float speed_default = 1.0f;
 	float speed_soft_drop = 0.05f;
 
+	sf::Clock lock_delay_clock;
+	const float lock_delay_time = 1.0f;
+	bool is_tetromino_grounded = false;
+	sf::RectangleShape lock_delay_bar_left;
+	sf::RectangleShape lock_delay_bar_right;
+
+	bool checkTetrominoGrounded() const;
+	void resetLockDelay();
+
 	void spawnTetromino();
 	void setSoftDrop(bool active);
 
 	void drawGhostTetromino(sf::RenderWindow& window);
 	void drawActiveTetromino(sf::RenderWindow& window);
+	void drawLockDelayBars(sf::RenderWindow& window);
 
 public:
 	Tetris();
