@@ -23,12 +23,13 @@ private:
 	const float SPEED_DEFAULT = 1.0f;
 	const float SPEED_SOFT_DROP = 0.05f;
 
-	// Sprites
+	// User Interface
 	sf::Sprite sprite_background;
 	sf::Sprite sprite_board;
 	sf::Sprite sprite_tetromino;
 	sf::Sprite sprite_tetromino_ghost;
 	sf::Sprite sprite_game_over_line;
+	sf::Text text_score;
 
 	// Core Components
 	Board board;

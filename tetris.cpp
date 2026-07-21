@@ -15,11 +15,16 @@ Tetris::Tetris() :
     sprite_board(Assets::getInstance().getTexture("board")),
     sprite_tetromino(Assets::getInstance().getTexture("tetromino")),
     sprite_tetromino_ghost(Assets::getInstance().getTexture("tetromino_ghost")),
-    sprite_game_over_line(Assets::getInstance().getTexture("game_over_line"))
+    sprite_game_over_line(Assets::getInstance().getTexture("game_over_line")),
+    text_score(Assets::getInstance().getFont("BaiJamjuree-Regular"))
 {
     sprite_background.setPosition({ 0, 0 });
     sprite_board.setPosition({ SPRITE_BOARD_OFFSET_X, SPRITE_BOARD_OFFSET_Y });
     sprite_game_over_line.setPosition({ SPRITE_BOARD_OFFSET_X, SPRITE_BOARD_OFFSET_Y + (3 * TEXTURE_SIZE)});
+
+    text_score.setCharacterSize(24);
+    text_score.setFillColor(sf::Color::White);
+    text_score.setPosition({ 50.f, 100.f });
 
     key_bindings[sf::Keyboard::Scancode::Left] = std::make_unique<CommandMove>(*this, sf::Vector2i(-1, 0));
     key_bindings[sf::Keyboard::Scancode::A] = std::make_unique<CommandMove>(*this, sf::Vector2i(-1, 0));
@@ -311,4 +316,10 @@ void Tetris::render(sf::RenderWindow& window)
     drawActiveTetromino(window);
     drawGhostTetromino(window);
     drawLockDelayBars(window);
+
+
+    // --- Render Score UI ---
+    text_score.setString("Score: " + std::to_string(manager_score.getScore()));
+    window.draw(text_score);
+
 }
