@@ -1,3 +1,4 @@
+#include "audio.h"
 #include "game.h"
 #include "state_exit_game.h"
 #include "state_main_menu.h"
@@ -30,6 +31,16 @@ void StateMainMenu::handleInput(const sf::Event& event)
         if (key->scancode == sf::Keyboard::Scancode::Escape)
         {
             Game::getInstance().pushState(std::make_unique<StateExitGame>());
+        }
+
+        if (key->scancode == sf::Keyboard::Scancode::NumpadPlus)
+        {
+            Audio::getInstance().volumeUp(5.f);
+        }
+
+        if (key->scancode == sf::Keyboard::Scancode::NumpadMinus)
+        {
+            Audio::getInstance().volumeDown(5.f);
         }
     }
 

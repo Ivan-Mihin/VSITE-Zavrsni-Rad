@@ -1,3 +1,4 @@
+#include "audio.h"
 #include "game.h"
 #include "state_exit_game.h"
 
@@ -33,6 +34,16 @@ void StateExitGame::handleInput(const sf::Event& event)
             key->scancode == sf::Keyboard::Scancode::Escape)
         {
             Game::getInstance().popState();
+        }
+
+        if (key->scancode == sf::Keyboard::Scancode::NumpadPlus)
+        {
+            Audio::getInstance().volumeUp(5.f);
+        }
+
+        if (key->scancode == sf::Keyboard::Scancode::NumpadMinus)
+        {
+            Audio::getInstance().volumeDown(5.f);
         }
     }
 

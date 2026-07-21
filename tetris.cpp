@@ -1,4 +1,5 @@
 #include "assets.h"
+#include "audio.h"
 #include "tetris.h"
 #include "tetromino_factory.h"
 
@@ -163,6 +164,7 @@ void Tetris::moveTetromino(const sf::Vector2i& offset)
     else
     {
         resetLockDelay();
+        Audio::getInstance().playSound("move");
     }
 }
 
@@ -180,6 +182,7 @@ void Tetris::rotateTetromino()
     else
     {
         resetLockDelay();
+        Audio::getInstance().playSound("rotate");
     }
 }
 
@@ -192,6 +195,8 @@ void Tetris::hardDropTetromino()
 
     // Reset to previous position
     tetromino->move({ 0, -1 });
+
+    Audio::getInstance().playSound("hard_drop");
 
     board.lockTetromino(tetromino->getBlocks(), static_cast<int>(tetromino->getColor()) + 1);
     isGameOver();

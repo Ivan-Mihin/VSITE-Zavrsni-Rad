@@ -1,3 +1,4 @@
+#include "audio.h"
 #include "board.h"
 
 #include <SFML/Graphics.hpp>
@@ -43,6 +44,9 @@ void Board::lockTetromino(const std::vector<sf::Vector2i>& tetromino, int color)
     {
         grid[tetromino[i].y][tetromino[i].x] = color;
     }
+
+    Audio::getInstance().playSound("floor");
+
 }
 
 void Board::clearFullLines()

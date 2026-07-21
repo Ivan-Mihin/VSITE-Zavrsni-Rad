@@ -94,9 +94,7 @@ void Assets::load()
             throw std::runtime_error("Failed to load rotate.ogg");
 
         // Music
-        music["menu"] = "Assets/Audio/Music/tetris_theme_song.ogg";
-        music["playing"] = "Assets/Audio/Music/tetris_theme_song.ogg";
-        music["game_over"] = "Assets/Audio/Music/tetris_theme_song.ogg";
+        music["tetirs_theme_song"] = "Assets/Audio/Music/tetris_theme_song.ogg";
 
     }
     catch (const std::exception& e)
