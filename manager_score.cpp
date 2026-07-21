@@ -1,9 +1,15 @@
+#include "audio.h"
 #include "manager_score.h"
 
 void ManagerScore::onNotify(GameEvent event)
 {
     if (event == GameEvent::NoLinesCleared)
     {
+        if (combo >= 2)
+        {
+            Audio::getInstance().playSound("combo_break");
+        }
+
         combo = 0;
         return;
     }

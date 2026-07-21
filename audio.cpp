@@ -1,6 +1,7 @@
 #include "assets.h"
 #include "audio.h"
 
+#include <memory>
 #include <string>
 
 Audio::Audio() {}
@@ -9,7 +10,7 @@ void Audio::cleanFinishedSounds()
 {
     for (int i = active_sounds.size() - 1; i >= 0; --i)
     {
-        if (active_sounds[i].getStatus() == sf::Sound::Status::Stopped)
+        if (active_sounds[i]->getStatus() == sf::Sound::Status::Stopped)
         {
             active_sounds.erase(active_sounds.begin() + i);
         }
@@ -30,8 +31,11 @@ void Audio::update()
 void Audio::playSound(const std::string& name)
 {
     const sf::SoundBuffer& buffer = Assets::getInstance().getSound(name);
-    active_sounds.emplace_back(buffer);
-    active_sounds.back().play();
+
+    std::unique_ptr<sf::Sound> sound = std::make_unique<sf::Sound>(buffer);
+    sound->play();
+
+    active_sounds.push_back(std::move(sound));
 }
 
 void Audio::playMusic(const std::string& name)

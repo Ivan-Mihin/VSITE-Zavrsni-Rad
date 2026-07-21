@@ -2,6 +2,7 @@
 
 #include <SFML/Audio.hpp>
 
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -11,10 +12,10 @@ class Audio
 private:
     Audio();
 
-    std::vector<sf::Sound> active_sounds;
+    std::vector<std::unique_ptr<sf::Sound>> active_sounds;
     sf::Music music;
 
-    float music_volume = 30.f;
+    float music_volume = 20.f;
 
     void cleanFinishedSounds();
 

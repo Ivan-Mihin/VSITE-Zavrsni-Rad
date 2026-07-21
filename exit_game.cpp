@@ -1,3 +1,4 @@
+#include "audio.h"
 #include "assets.h"
 #include "exit_game.h"
 
@@ -60,6 +61,8 @@ void ExitGame::handleInput(const sf::Event& event)
     {
         if (key->scancode == sf::Keyboard::Scancode::Up)
         {
+            Audio::getInstance().playSound("navigation");
+
             selected = ExitGameItem::Yes;
 
             text_yes_target_size = TEXT_MAX_SIZE;
@@ -68,6 +71,8 @@ void ExitGame::handleInput(const sf::Event& event)
 
         if (key->scancode == sf::Keyboard::Scancode::Down)
         {
+            Audio::getInstance().playSound("navigation");
+
             selected = ExitGameItem::No;
 
             text_yes_target_size = TEXT_DEFAULT_SIZE;

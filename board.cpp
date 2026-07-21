@@ -70,6 +70,7 @@ void Board::clearFullLines()
         if (is_line_full)
         {
             // Deletes the full line, adds a new one on top, and resets to the same row to recheck it after the shift
+            Audio::getInstance().playSound("clear_line");
             grid.erase(grid.begin() + row);
             grid.insert(grid.begin(), std::vector<int>(COLUMNS, 0));
             ++row;
