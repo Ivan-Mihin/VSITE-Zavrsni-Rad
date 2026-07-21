@@ -67,6 +67,11 @@ private:
 	void drawActiveTetromino(sf::RenderWindow& window);
 	void drawGhostTetromino(sf::RenderWindow& window);
 	void drawLockDelayBars(sf::RenderWindow& window);
+	void drawUserInterface(sf::RenderWindow& window);
+
+	// Initialization
+	void initializeUserInterface();
+	void initializeKeyBindings();
 
 public:
 	Tetris();
