@@ -65,7 +65,10 @@ void GameOver::handleInput(const sf::Event& event)
     {
         if (key->scancode == sf::Keyboard::Scancode::Up)
         {
-            Audio::getInstance().playSound("navigation");
+            if (selected != GameOverItem::Restart)
+            {
+                Audio::getInstance().playSound("navigation");
+            }
 
             selected = GameOverItem::Restart;
 
@@ -75,7 +78,10 @@ void GameOver::handleInput(const sf::Event& event)
 
         if (key->scancode == sf::Keyboard::Scancode::Down)
         {
-            Audio::getInstance().playSound("navigation");
+            if (selected != GameOverItem::Exit)
+            {
+                Audio::getInstance().playSound("navigation");
+            }
 
             selected = GameOverItem::Exit;
 

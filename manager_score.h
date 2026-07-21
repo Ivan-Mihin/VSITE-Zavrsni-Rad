@@ -6,7 +6,6 @@ class ManagerScore : public IObserver
 {
 private:
     int score = 0;
-    int lines_cleared = 0;
     int combo = 0;
 
 public:

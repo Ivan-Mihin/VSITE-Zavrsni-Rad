@@ -11,7 +11,7 @@
 Game::Game()
     : window(sf::VideoMode({ 800, 800 }), "Tetris!", sf::Style::Titlebar | sf::Style::Close)
 {
-    changeState(std::make_unique<StateMainMenu>());
+    pushState(std::make_unique<StateMainMenu>());
     Audio::getInstance().playMusic("tetirs_theme_song");
 }
 

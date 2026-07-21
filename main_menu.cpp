@@ -61,7 +61,10 @@ void MainMenu::handleInput(const sf::Event& event)
     {
         if (key->scancode == sf::Keyboard::Scancode::Up)
         {
-            Audio::getInstance().playSound("navigation");
+            if (selected != MainMenuItem::Start)
+            {
+                Audio::getInstance().playSound("navigation");
+            }
 
             selected = MainMenuItem::Start;
 
@@ -71,7 +74,10 @@ void MainMenu::handleInput(const sf::Event& event)
 
         if (key->scancode == sf::Keyboard::Scancode::Down)
         {
-            Audio::getInstance().playSound("navigation");
+            if (selected != MainMenuItem::Exit)
+            {
+                Audio::getInstance().playSound("navigation");
+            }
 
             selected = MainMenuItem::Exit;
 

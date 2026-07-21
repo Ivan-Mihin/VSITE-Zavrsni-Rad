@@ -61,7 +61,10 @@ void ExitGame::handleInput(const sf::Event& event)
     {
         if (key->scancode == sf::Keyboard::Scancode::Up)
         {
-            Audio::getInstance().playSound("navigation");
+            if (selected != ExitGameItem::Yes)
+            {
+                Audio::getInstance().playSound("navigation");
+            }
 
             selected = ExitGameItem::Yes;
 
@@ -71,7 +74,10 @@ void ExitGame::handleInput(const sf::Event& event)
 
         if (key->scancode == sf::Keyboard::Scancode::Down)
         {
-            Audio::getInstance().playSound("navigation");
+            if (selected != ExitGameItem::No)
+            {
+                Audio::getInstance().playSound("navigation");
+            }
 
             selected = ExitGameItem::No;
 
