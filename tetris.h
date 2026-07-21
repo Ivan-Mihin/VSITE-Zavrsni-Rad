@@ -2,6 +2,7 @@
 
 #include "board.h"
 #include "commands.h"
+#include "manager_score.h"
 #include "tetromino.h"
 
 #include <SFML/Graphics.hpp>
@@ -43,6 +44,9 @@ private:
 	bool is_tetromino_grounded = false;
 	sf::RectangleShape lock_delay_bar_left;
 	sf::RectangleShape lock_delay_bar_right;
+
+	// Observers
+	ManagerScore manager_score;
 
 	// Tetromino Movement
 	void spawnTetromino();

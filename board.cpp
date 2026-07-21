@@ -1,5 +1,6 @@
 #include "audio.h"
 #include "board.h"
+#include "subject.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -51,6 +52,8 @@ void Board::lockTetromino(const std::vector<sf::Vector2i>& tetromino, int color)
 
 void Board::clearFullLines()
 {
+    int cleared_lines_count = 0;
+
     for (int row = ROWS - 1; row >= 0; --row)
     {
         bool is_line_full = true;
@@ -70,7 +73,24 @@ void Board::clearFullLines()
             grid.erase(grid.begin() + row);
             grid.insert(grid.begin(), std::vector<int>(COLUMNS, 0));
             ++row;
+            ++cleared_lines_count;
         }
+    }
+
+    switch (cleared_lines_count)
+    {
+        case 1:
+            notifyObservers(GameEvent::LinesCleared_1);
+            break;
+        case 2:
+            notifyObservers(GameEvent::LinesCleared_2);
+            break;
+        case 3:
+            notifyObservers(GameEvent::LinesCleared_3);
+            break;
+        case 4:
+            notifyObservers(GameEvent::LinesCleared_4);
+            break;
     }
 }
 

@@ -1,11 +1,13 @@
 #pragma once
 
+#include "subject.h"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
 #include <vector>
 
-class Board
+class Board : public Subject
 {
 private:
     // Constants

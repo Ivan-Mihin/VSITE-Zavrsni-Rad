@@ -32,6 +32,8 @@ Tetris::Tetris() :
     lock_delay_bar_left.setFillColor(sf::Color(255, 255, 255, 255));
     lock_delay_bar_right.setFillColor(sf::Color(255, 255, 255, 255));
 
+    board.addObserver(&manager_score);
+
     spawnTetromino();
 }
 
