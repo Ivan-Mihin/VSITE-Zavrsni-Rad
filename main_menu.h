@@ -24,6 +24,7 @@ private:
 	sf::Sprite sprite_logo;
 	sf::Text text_start;
 	sf::Text text_exit;
+	sf::Text key_bindings;
 
 	// Menu State
 	MainMenuItem selected = MainMenuItem::Start;

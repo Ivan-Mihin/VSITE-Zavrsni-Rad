@@ -11,7 +11,8 @@ ExitGame::ExitGame() :
     text_exit(Assets::getInstance().getFont("BaiJamjuree-Regular")),
     text_game(Assets::getInstance().getFont("BaiJamjuree-Regular")),
     text_yes(Assets::getInstance().getFont("BaiJamjuree-Regular")),
-    text_no(Assets::getInstance().getFont("BaiJamjuree-Regular"))
+    text_no(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    key_bindings(Assets::getInstance().getFont("BaiJamjuree-Regular"))
 {
     sprite_background.setPosition({ 0, 0 });
 
@@ -19,6 +20,7 @@ ExitGame::ExitGame() :
     textUpdate(text_game, "GAME?", 125, 400.f, 270.f);
     textUpdate(text_yes, "Yes", 50, 400.f, 550.f);
     textUpdate(text_no, "No", 50, 400.f, 630.f);
+    textUpdate(key_bindings, "Select <Space> <Enter> - Cancel <Escape>", 20, 400.f, 770.f);
 
     text_yes_current_size = TEXT_MAX_SIZE;
     text_yes_target_size = TEXT_MAX_SIZE;
@@ -117,4 +119,5 @@ void ExitGame::render(sf::RenderWindow& window)
     window.draw(text_game);
     window.draw(text_yes);
     window.draw(text_no);
+    window.draw(key_bindings);
 }

@@ -25,6 +25,7 @@ private:
 	sf::Sprite sprite_logo_game_over_2;
 	sf::Text text_restart;
 	sf::Text text_exit;
+	sf::Text key_bindings;
 
 	// Menu State
 	GameOverItem selected = GameOverItem::Restart;;

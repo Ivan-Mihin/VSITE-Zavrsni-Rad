@@ -10,7 +10,8 @@ MainMenu::MainMenu() :
     sprite_background(Assets::getInstance().getTexture("background")),
     sprite_logo(Assets::getInstance().getTexture("logo_tetris")),
     text_start(Assets::getInstance().getFont("BaiJamjuree-Regular")),
-    text_exit(Assets::getInstance().getFont("BaiJamjuree-Regular"))
+    text_exit(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    key_bindings(Assets::getInstance().getFont("BaiJamjuree-Regular"))
 {
     sprite_background.setPosition({ 0, 0 });
 
@@ -19,6 +20,7 @@ MainMenu::MainMenu() :
 
     textUpdate(text_start, "Start", 50, 400.f, 550.f);
     textUpdate(text_exit, "Exit", 50, 400.f, 630.f);
+    textUpdate(key_bindings, "Select <Space> <Enter> - Cancel <Escape>", 20, 400.f, 770.f);
 
     text_start_current_size = TEXT_MAX_SIZE;
     text_start_target_size = TEXT_MAX_SIZE;
@@ -116,4 +118,5 @@ void MainMenu::render(sf::RenderWindow& window)
     window.draw(sprite_logo);
     window.draw(text_start);
     window.draw(text_exit);
+    window.draw(key_bindings);
 }

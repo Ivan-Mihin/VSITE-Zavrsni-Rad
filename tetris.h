@@ -34,6 +34,18 @@ private:
 	sf::Text text_score;
 	sf::Text text_combo;
 	sf::Clock clock_combo_flash;
+	sf::Text key_bindings_exit_label;
+	sf::Text key_bindings_exit_key;
+	sf::Text key_bindings_move_left_label;
+	sf::Text key_bindings_move_left_key;
+	sf::Text key_bindings_move_right_label;
+	sf::Text key_bindings_move_right_key;
+	sf::Text key_bindings_rotate_label;
+	sf::Text key_bindings_rotate_key;
+	sf::Text key_bindings_soft_drop_label;
+	sf::Text key_bindings_soft_drop_key;
+	sf::Text key_bindings_hard_drop_label;
+	sf::Text key_bindings_hard_drop_key;
 
 	// Core Components
 	Board board;

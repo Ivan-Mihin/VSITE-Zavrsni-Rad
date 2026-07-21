@@ -20,7 +20,19 @@ Tetris::Tetris() :
     label_score(Assets::getInstance().getFont("BaiJamjuree-Regular")),
     label_combo(Assets::getInstance().getFont("BaiJamjuree-Regular")),
     text_score(Assets::getInstance().getFont("BaiJamjuree-Regular")),
-    text_combo(Assets::getInstance().getFont("BaiJamjuree-Regular"))
+    text_combo(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    key_bindings_exit_label(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    key_bindings_move_left_label(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    key_bindings_move_right_label(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    key_bindings_rotate_label(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    key_bindings_soft_drop_label(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    key_bindings_hard_drop_label(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    key_bindings_exit_key(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    key_bindings_move_left_key(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    key_bindings_move_right_key(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    key_bindings_rotate_key(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    key_bindings_soft_drop_key(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    key_bindings_hard_drop_key(Assets::getInstance().getFont("BaiJamjuree-Regular"))
 {
     initializeUserInterface();
     initializeKeyBindings();
@@ -35,6 +47,9 @@ Tetris::Tetris() :
 
 void Tetris::initializeUserInterface()
 {
+    float position_x;
+    float board_right = SPRITE_BOARD_OFFSET_X + (12.f * static_cast<float>(TEXTURE_SIZE));
+
     sprite_background.setPosition({ 0, 0 });
     sprite_board.setPosition({ SPRITE_BOARD_OFFSET_X, SPRITE_BOARD_OFFSET_Y });
     sprite_game_over_line.setPosition({ SPRITE_BOARD_OFFSET_X, SPRITE_BOARD_OFFSET_Y + (3 * TEXTURE_SIZE) });
@@ -42,20 +57,92 @@ void Tetris::initializeUserInterface()
     label_score.setString("Score");
     label_score.setCharacterSize(37);
     label_score.setFillColor(sf::Color::White);
-    float label_score_position_x = (SPRITE_BOARD_OFFSET_X - label_score.getLocalBounds().size.x) / 2.f;
-    label_score.setPosition({ label_score_position_x, 100.f });
+    position_x = (SPRITE_BOARD_OFFSET_X - label_score.getLocalBounds().size.x) / 2.f;
+    label_score.setPosition({ position_x, 25.f });
 
     label_combo.setString("Combo");
     label_combo.setCharacterSize(37);
     label_combo.setFillColor(sf::Color::White);
-    float label_combo_position_x = (SPRITE_BOARD_OFFSET_X - label_combo.getLocalBounds().size.x) / 2.f;
-    label_combo.setPosition({ label_combo_position_x, 230.f });
+    position_x = (SPRITE_BOARD_OFFSET_X - label_combo.getLocalBounds().size.x) / 2.f;
+    label_combo.setPosition({ position_x, 165.f });
 
     text_score.setCharacterSize(37);
     text_score.setFillColor(sf::Color::White);
 
     text_combo.setCharacterSize(37);
     text_combo.setFillColor(sf::Color::White);
+
+    key_bindings_exit_label.setString("Exit");
+    key_bindings_exit_label.setCharacterSize(20);
+    key_bindings_exit_label.setFillColor(sf::Color::White);
+    position_x = board_right + ((800 - board_right) - key_bindings_exit_label.getLocalBounds().size.x) / 2.f;
+    key_bindings_exit_label.setPosition({ position_x, 25.f });
+
+    key_bindings_exit_key.setString("<Escape>");
+    key_bindings_exit_key.setCharacterSize(20);
+    key_bindings_exit_key.setFillColor(sf::Color::White);
+    position_x = board_right + ((800 - board_right) - key_bindings_exit_key.getLocalBounds().size.x) / 2.f;
+    key_bindings_exit_key.setPosition({ position_x, 45.f });
+
+    key_bindings_move_left_label.setString("Move Left");
+    key_bindings_move_left_label.setCharacterSize(20);
+    key_bindings_move_left_label.setFillColor(sf::Color::White);
+    position_x = board_right + ((800 - board_right) - key_bindings_move_left_label.getLocalBounds().size.x) / 2.f;
+    key_bindings_move_left_label.setPosition({ position_x, 85.f });
+
+    key_bindings_move_left_key.setString("<A> <Left Arrow>");
+    key_bindings_move_left_key.setCharacterSize(20);
+    key_bindings_move_left_key.setFillColor(sf::Color::White);
+    position_x = board_right + ((800 - board_right) - key_bindings_move_left_key.getLocalBounds().size.x) / 2.f;
+    key_bindings_move_left_key.setPosition({ position_x, 105.f });
+
+    key_bindings_move_right_label.setString("Move Right");
+    key_bindings_move_right_label.setCharacterSize(20);
+    key_bindings_move_right_label.setFillColor(sf::Color::White);
+    position_x = board_right + ((800 - board_right) - key_bindings_move_right_label.getLocalBounds().size.x) / 2.f;
+    key_bindings_move_right_label.setPosition({ position_x, 145.f });
+
+    key_bindings_move_right_key.setString("<D> <Right Arrow>");
+    key_bindings_move_right_key.setCharacterSize(20);
+    key_bindings_move_right_key.setFillColor(sf::Color::White);
+    position_x = board_right + ((800 - board_right) - key_bindings_move_right_key.getLocalBounds().size.x) / 2.f;
+    key_bindings_move_right_key.setPosition({ position_x, 165.f });
+
+    key_bindings_rotate_label.setString("Rotate");
+    key_bindings_rotate_label.setCharacterSize(20);
+    key_bindings_rotate_label.setFillColor(sf::Color::White);
+    position_x = board_right + ((800 - board_right) - key_bindings_rotate_label.getLocalBounds().size.x) / 2.f;
+    key_bindings_rotate_label.setPosition({ position_x, 205.f });
+
+    key_bindings_rotate_key.setString("<W> <Up Arrow>");
+    key_bindings_rotate_key.setCharacterSize(20);
+    key_bindings_rotate_key.setFillColor(sf::Color::White);
+    position_x = board_right + ((800 - board_right) - key_bindings_rotate_key.getLocalBounds().size.x) / 2.f;
+    key_bindings_rotate_key.setPosition({ position_x, 225.f });
+
+    key_bindings_soft_drop_label.setString("Soft Drop");
+    key_bindings_soft_drop_label.setCharacterSize(20);
+    key_bindings_soft_drop_label.setFillColor(sf::Color::White);
+    position_x = board_right + ((800 - board_right) - key_bindings_soft_drop_label.getLocalBounds().size.x) / 2.f;
+    key_bindings_soft_drop_label.setPosition({ position_x, 265.f });
+
+    key_bindings_soft_drop_key.setString("<S> <Down Arrow>");
+    key_bindings_soft_drop_key.setCharacterSize(20);
+    key_bindings_soft_drop_key.setFillColor(sf::Color::White);
+    position_x = board_right + ((800 - board_right) - key_bindings_soft_drop_key.getLocalBounds().size.x) / 2.f;
+    key_bindings_soft_drop_key.setPosition({ position_x, 285.f });
+
+    key_bindings_hard_drop_label.setString("Hard Drop");
+    key_bindings_hard_drop_label.setCharacterSize(20);
+    key_bindings_hard_drop_label.setFillColor(sf::Color::White);
+    position_x = board_right + ((800 - board_right) - key_bindings_hard_drop_label.getLocalBounds().size.x) / 2.f;
+    key_bindings_hard_drop_label.setPosition({ position_x, 325.f });
+
+    key_bindings_hard_drop_key.setString("<Space>");
+    key_bindings_hard_drop_key.setCharacterSize(20);
+    key_bindings_hard_drop_key.setFillColor(sf::Color::White);
+    position_x = board_right + ((800 - board_right) - key_bindings_hard_drop_key.getLocalBounds().size.x) / 2.f;
+    key_bindings_hard_drop_key.setPosition({ position_x, 345.f });
 }
 
 void Tetris::initializeKeyBindings()
@@ -187,7 +274,7 @@ void Tetris::drawUserInterface(sf::RenderWindow& window)
 
     text_score.setString(std::to_string(manager_score.getScore()));
     float text_score_position_x = (SPRITE_BOARD_OFFSET_X - text_score.getLocalBounds().size.x) / 2.f;
-    text_score.setPosition({ text_score_position_x, 145.f });
+    text_score.setPosition({ text_score_position_x, 70.f });
     window.draw(text_score);
 
     if (manager_score.isComboActive())
@@ -204,13 +291,31 @@ void Tetris::drawUserInterface(sf::RenderWindow& window)
         window.draw(label_combo);
 
         float text_combo_position_x = (SPRITE_BOARD_OFFSET_X - text_combo.getLocalBounds().size.x) / 2.f;
-        text_combo.setPosition({ text_combo_position_x, 275.f });
+        text_combo.setPosition({ text_combo_position_x, 200.f });
         window.draw(text_combo);
     }
     else
     {
         clock_combo_flash.restart();
     }
+
+    window.draw(key_bindings_exit_label);
+    window.draw(key_bindings_exit_key);
+
+    window.draw(key_bindings_move_left_label);
+    window.draw(key_bindings_move_left_key);
+
+    window.draw(key_bindings_move_right_label);
+    window.draw(key_bindings_move_right_key);
+
+    window.draw(key_bindings_rotate_label);
+    window.draw(key_bindings_rotate_key);
+
+    window.draw(key_bindings_soft_drop_label);
+    window.draw(key_bindings_soft_drop_key);
+
+    window.draw(key_bindings_hard_drop_label);
+    window.draw(key_bindings_hard_drop_key);
 }
 
 bool Tetris::isGameOver()

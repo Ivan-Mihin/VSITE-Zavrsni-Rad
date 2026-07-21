@@ -25,6 +25,7 @@ private:
 	sf::Text text_game;
 	sf::Text text_yes;
 	sf::Text text_no;
+	sf::Text key_bindings;
 
 	// Menu State
 	ExitGameItem selected = ExitGameItem::Yes;

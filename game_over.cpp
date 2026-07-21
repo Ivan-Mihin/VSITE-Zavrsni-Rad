@@ -11,7 +11,8 @@ GameOver::GameOver() :
     sprite_logo_game_over_1(Assets::getInstance().getTexture("logo_game_over_1")),
     sprite_logo_game_over_2(Assets::getInstance().getTexture("logo_game_over_2")),
     text_restart(Assets::getInstance().getFont("BaiJamjuree-Regular")),
-    text_exit(Assets::getInstance().getFont("BaiJamjuree-Regular"))
+    text_exit(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    key_bindings(Assets::getInstance().getFont("BaiJamjuree-Regular"))
 {
     sprite_background.setPosition({ 0, 0 });
 
@@ -23,6 +24,7 @@ GameOver::GameOver() :
 
     textUpdate(text_restart, "Restart", 50, 400.f, 550.f);
     textUpdate(text_exit, "Exit", 50, 400.f, 630.f);
+    textUpdate(key_bindings, "Select <Space> <Enter> - Cancel <Escape>", 20, 400.f, 770.f);
 
     text_start_current_size = TEXT_MAX_SIZE;
     text_start_target_size = TEXT_MAX_SIZE;
@@ -121,4 +123,5 @@ void GameOver::render(sf::RenderWindow& window)
     window.draw(sprite_logo_game_over_2);
     window.draw(text_restart);
     window.draw(text_exit);
+    window.draw(key_bindings);
 }
