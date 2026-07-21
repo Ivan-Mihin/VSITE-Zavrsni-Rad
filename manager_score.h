@@ -12,7 +12,6 @@ public:
     void onNotify(GameEvent event) override;
 
     int getScore() const;
-    int getLinesCleared() const;
 
     void addScore(int value);
 };
