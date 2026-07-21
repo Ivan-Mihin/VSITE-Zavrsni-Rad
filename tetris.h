@@ -29,7 +29,11 @@ private:
 	sf::Sprite sprite_tetromino;
 	sf::Sprite sprite_tetromino_ghost;
 	sf::Sprite sprite_game_over_line;
+	sf::Text label_score;
+	sf::Text label_combo;
 	sf::Text text_score;
+	sf::Text text_combo;
+	sf::Clock clock_combo_flash;
 
 	// Core Components
 	Board board;

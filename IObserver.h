@@ -2,6 +2,7 @@
 
 enum class GameEvent
 {
+    NoLinesCleared,
     LinesCleared_1,
     LinesCleared_2,
     LinesCleared_3,

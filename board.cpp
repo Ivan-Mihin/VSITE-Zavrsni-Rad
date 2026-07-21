@@ -79,6 +79,9 @@ void Board::clearFullLines()
 
     switch (cleared_lines_count)
     {
+        case 0:
+            notifyObservers(GameEvent::NoLinesCleared);
+            break;
         case 1:
             notifyObservers(GameEvent::LinesCleared_1);
             break;

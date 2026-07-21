@@ -7,6 +7,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
+#include <cmath>
 #include <memory>
 #include <vector>
 
@@ -16,15 +17,34 @@ Tetris::Tetris() :
     sprite_tetromino(Assets::getInstance().getTexture("tetromino")),
     sprite_tetromino_ghost(Assets::getInstance().getTexture("tetromino_ghost")),
     sprite_game_over_line(Assets::getInstance().getTexture("game_over_line")),
-    text_score(Assets::getInstance().getFont("BaiJamjuree-Regular"))
+    label_score(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    label_combo(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    text_score(Assets::getInstance().getFont("BaiJamjuree-Regular")),
+    text_combo(Assets::getInstance().getFont("BaiJamjuree-Regular"))
 {
     sprite_background.setPosition({ 0, 0 });
     sprite_board.setPosition({ SPRITE_BOARD_OFFSET_X, SPRITE_BOARD_OFFSET_Y });
     sprite_game_over_line.setPosition({ SPRITE_BOARD_OFFSET_X, SPRITE_BOARD_OFFSET_Y + (3 * TEXTURE_SIZE)});
 
-    text_score.setCharacterSize(24);
+    label_score.setString("Score");
+    label_score.setCharacterSize(37);
+    label_score.setFillColor(sf::Color::White);
+    float label_score_position_x = (SPRITE_BOARD_OFFSET_X - label_score.getLocalBounds().size.x) / 2.f;
+    label_score.setPosition({ label_score_position_x, 100.f });
+
+    label_combo.setString("Combo");
+    label_combo.setCharacterSize(37);
+    label_combo.setFillColor(sf::Color::White);
+    float label_combo_position_x = (SPRITE_BOARD_OFFSET_X - label_combo.getLocalBounds().size.x) / 2.f;
+    label_combo.setPosition({ label_combo_position_x, 230.f });
+
+    text_score.setCharacterSize(37);
     text_score.setFillColor(sf::Color::White);
-    text_score.setPosition({ 50.f, 100.f });
+    text_score.setPosition({ 50.f, 145.f });
+
+    text_combo.setCharacterSize(37);
+    text_combo.setFillColor(sf::Color::White);
+    text_combo.setPosition({ 50.f, 275.f });
 
     key_bindings[sf::Keyboard::Scancode::Left] = std::make_unique<CommandMove>(*this, sf::Vector2i(-1, 0));
     key_bindings[sf::Keyboard::Scancode::A] = std::make_unique<CommandMove>(*this, sf::Vector2i(-1, 0));
@@ -317,9 +337,32 @@ void Tetris::render(sf::RenderWindow& window)
     drawGhostTetromino(window);
     drawLockDelayBars(window);
 
+    window.draw(label_score);
 
-    // --- Render Score UI ---
-    text_score.setString("Score: " + std::to_string(manager_score.getScore()));
+    text_score.setString(std::to_string(manager_score.getScore()));
+    float text_score_position_x = (SPRITE_BOARD_OFFSET_X - text_score.getLocalBounds().size.x) / 2.f;
+    text_score.setPosition({ text_score_position_x, 145.f });
     window.draw(text_score);
 
+    if (manager_score.isComboActive())
+    {
+        text_combo.setString("x" + std::to_string(manager_score.getCombo()));
+
+        float time = clock_combo_flash.getElapsedTime().asSeconds();
+        const float PI = 3.14159265f;
+        float factor = (std::sin(time * 2.f * PI) + 1.f) * 0.5f;
+        std::uint8_t color = static_cast<std::uint8_t>(127.f + factor * (255.f - 127.f));
+        label_combo.setFillColor(sf::Color(color, color, color));
+        text_combo.setFillColor(sf::Color(color, color, color));
+
+        window.draw(label_combo);
+
+        float text_combo_position_x = (SPRITE_BOARD_OFFSET_X - text_combo.getLocalBounds().size.x) / 2.f;
+        text_combo.setPosition({ text_combo_position_x, 275.f });
+        window.draw(text_combo);
+    }
+    else
+    {
+        clock_combo_flash.restart();
+    }
 }
