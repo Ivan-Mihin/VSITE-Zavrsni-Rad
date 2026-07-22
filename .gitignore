@@ -400,7 +400,9 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-# Keep SFML runtime DLLs
+# Keep SFML binaries
 !SFML-3.0.2-x64/bin/
+!SFML-3.0.2-x64/bin/Debug/
+!SFML-3.0.2-x64/bin/Release/
 !SFML-3.0.2-x64/bin/Debug/*.dll
 !SFML-3.0.2-x64/bin/Release/*.dll
