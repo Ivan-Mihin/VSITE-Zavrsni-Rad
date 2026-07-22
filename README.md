@@ -1,2 +1,1 @@
-# VSITE-Zavrsni-Rad
-//add later
+# Završni rad za VsiTe na temu "Predlošci dizajna"
