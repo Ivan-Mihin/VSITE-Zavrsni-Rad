@@ -21,7 +21,7 @@ ExitGame::ExitGame() :
     textUpdate(text_game, "GAME?", 125, 400.f, 270.f);
     textUpdate(text_yes, "Yes", 50, 400.f, 550.f);
     textUpdate(text_no, "No", 50, 400.f, 630.f);
-    textUpdate(key_bindings, "Select <Space> <Enter> - Cancel <Escape>", 20, 400.f, 770.f);
+    textUpdate(key_bindings, "Select <Space> <Enter> - Cancel <Escape> - Volume Up <+> - Volume Down <->", 20, 400.f, 770.f);
 
     text_yes_current_size = TEXT_MAX_SIZE;
     text_yes_target_size = TEXT_MAX_SIZE;

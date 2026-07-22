@@ -46,6 +46,10 @@ private:
 	sf::Text key_bindings_soft_drop_key;
 	sf::Text key_bindings_hard_drop_label;
 	sf::Text key_bindings_hard_drop_key;
+	sf::Text key_bindings_volume_up_label;
+	sf::Text key_bindings_volume_up_key;
+	sf::Text key_bindings_volume_down_label;
+	sf::Text key_bindings_volume_down_key;
 
 	// Core Components
 	Board board;
@@ -83,6 +87,7 @@ private:
 
 	// Initialization
 	void initializeUserInterface();
+	void initializeText(sf::Text& text, std::string string, float position_y);
 	void initializeKeyBindings();
 
 public:

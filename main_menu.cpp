@@ -21,7 +21,7 @@ MainMenu::MainMenu() :
 
     textUpdate(text_start, "Start", 50, 400.f, 550.f);
     textUpdate(text_exit, "Exit", 50, 400.f, 630.f);
-    textUpdate(key_bindings, "Select <Space> <Enter> - Cancel <Escape>", 20, 400.f, 770.f);
+    textUpdate(key_bindings, "Select <Space> <Enter> - Cancel <Escape> - Volume Up <+> - Volume Down <->", 20, 400.f, 770.f);
 
     text_start_current_size = TEXT_MAX_SIZE;
     text_start_target_size = TEXT_MAX_SIZE;
