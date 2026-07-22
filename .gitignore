@@ -402,4 +402,5 @@ FodyWeavers.xsd
 
 # Keep SFML runtime DLLs
 !SFML-3.0.2-x64/bin/
-!SFML-3.0.2-x64/bin/*.dll
+!SFML-3.0.2-x64/bin/Debug/*.dll
+!SFML-3.0.2-x64/bin/Release/*.dll
